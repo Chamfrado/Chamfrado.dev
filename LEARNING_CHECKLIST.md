@@ -4,15 +4,15 @@
 **Objetivo:** ter o projeto rodando bonitinho, com padrão de código e tema base.
 
 ### Bootstrap
-- [ ] Vite + React + TypeScript
-- [ ] Tailwind + shadcn/ui
+- [x] Vite + React + TypeScript
+- [x] Tailwind + shadcn/ui
 - [ ] ESLint + Prettier + Husky + lint-staged
-- [ ] React Router + alias @/*
+- [x] React Router + alias @/*
 - [ ] TanStack Query + Zustand
 - [ ] Framer Motion
 
 ### Design tokens (neon 80s/90s)
-- [ ] Cores-base definidas
+- [x] Cores-base definidas
 - [ ] Gradientes configurados
 - [ ] Tipografia estabelecida
 - [ ] Espaçamentos padronizados
@@ -178,7 +178,7 @@
 
 ## 📈 Progresso Geral
 
-**Fase 0:** ⬜ 0% (0/X tarefas)
+**Fase 0:** 🟡 31% (4/13 tarefas concluídas)
 **Fase 1:** ⬜ 0% (0/X tarefas)  
 **Fase 2:** ⬜ 0% (0/X tarefas)
 **Fase 3:** ⬜ 0% (0/X tarefas)
