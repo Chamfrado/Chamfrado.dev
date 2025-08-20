@@ -1,12 +1,16 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @theme {
   --color-neon-bg: #0a0f1f;
   --color-neon-cyan: #08f7fe;
   --color-neon-pink: #fe53bb;
   --color-neon-yellow: #f5d300;
   --color-neon-green: #00ff85;
-  --shadow-neon: 0 0 30px rgba(8,247,254,.2);
+  --shadow-neon: 0 0 30px rgba(8, 247, 254, 0.2);
 }
 
-:root { color-scheme: dark; }
-body { background: #0a0f1f; }
+:root {
+  color-scheme: dark;
+}
+body {
+  background: #0a0f1f;
+}
