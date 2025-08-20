@@ -9,7 +9,7 @@
 - [x] Vite + React + TypeScript
 - [x] Tailwind + shadcn/ui
 - [x] ESLint + Prettier + Husky + lint-staged
-- [x] React Router + alias @/\*
+- [x] React Router + alias @/* (✅ configurado com lazy loading)
 - [ ] TanStack Query + Zustand
 - [ ] Framer Motion
 
@@ -46,11 +46,11 @@
 
 ### Páginas
 
-- [ ] Home (Hero neon, call-to-action "Iniciar Jornada")
+- [x] Home (Hero neon, call-to-action "Iniciar Jornada")
 - [ ] Journey (lista de trilhas)
 - [ ] Track/:slug (roadmap com marcos)
 - [ ] Lesson/:id (conteúdo + progresso local)
-- [ ] About (sobre você — mostrar "Lohran" aqui)
+- [x] About (sobre você — mostrar "Lohran" aqui)
 - [ ] Projects (cases com writeups)
 - [ ] Profile (mock inicial)
 
