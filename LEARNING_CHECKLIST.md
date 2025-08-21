@@ -28,7 +28,7 @@
 ### CI/CD + Observabilidade
 
 - [ ] Deploy no Vercel
-- [ ] GitHub Actions: lint → typecheck → build → tests
+- [x] GitHub Actions: lint → typecheck → build → tests
 - [ ] PostHog/Plausible (pageviews + evento: "lesson_completed")
 
 ### Definition of Done (DoD)
