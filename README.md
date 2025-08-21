@@ -102,10 +102,10 @@ Ver [LEARNING_CHECKLIST.md](./LEARNING_CHECKLIST.md) para detalhes completos.
 
 ## 👨‍💻 Sobre Mim
 
-**Lohran Mendes** - Desenvolvedor Frontend apaixonado por criar experiências digitais excepcionais. Especializado em React, TypeScript e performance web.
+**Lohran Cintra** - Desenvolvedor Frontend apaixonado por criar experiências digitais excepcionais. Especializado em React, TypeScript e performance web.
 
 - 🌐 **Website**: [chamfrado.dev](https://chamfrado.dev)
-- 💼 **LinkedIn**: [linkedin.com/in/lohran-mendes](https://linkedin.com/in/lohran-mendes)
+- 💼 **LinkedIn**: [linkedin.com/in/lohran-cintra](https://linkedin.com/in/lohran-cintra)
 - 🐙 **GitHub**: [github.com/chamfrado](https://github.com/chamfrado)
 
 ## 📄 Licença
@@ -115,5 +115,5 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para 
 ---
 
 <div align="center">
-  <strong>🌟 Construído com paixão e muito ☕ por Lohran Mendes</strong>
+  <strong>🌟 Construído com paixão e muito ☕ por Lohran Cintra</strong>
 </div>

@@ -50,7 +50,7 @@
 - [ ] Journey (lista de trilhas)
 - [ ] Track/:slug (roadmap com marcos)
 - [ ] Lesson/:id (conteúdo + progresso local)
-- [x] About (sobre você — mostrar "Lohran" aqui)
+- [x] About (sobre você — mostrar "Lohran Cintra" aqui)
 - [ ] Projects (cases com writeups)
 - [ ] Profile (mock inicial)
 
