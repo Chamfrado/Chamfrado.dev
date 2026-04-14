@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { sections } from "../../data/sections";
 import BuildingCard from "./BuildingCard";
+import Motorcycle from "./Motorcycle";
+import StreetHUD from "./StreetHUD";
 
 const CARD_WIDTH_MOBILE = 320;
 const CARD_WIDTH_DESKTOP = 420;
@@ -24,7 +25,6 @@ export default function CityView() {
   }, []);
 
   const activeSection = sections[activeIndex];
-
   const step = cardWidth + CARD_GAP;
   const trackOffset = activeIndex * step;
 
@@ -44,6 +44,7 @@ export default function CityView() {
         <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:32px_32px]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute inset-x-0 bottom-24 h-px bg-fuchsia-400/15" />
+        <div className="absolute inset-x-0 bottom-28 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400/40 to-transparent" />
 
         <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 py-6 md:px-8">
           <header className="pt-2">
@@ -60,6 +61,19 @@ export default function CityView() {
           </header>
 
           <section className="relative flex-1 py-8 md:py-10">
+            <div className="pointer-events-none absolute inset-x-0 top-10 hidden items-end justify-between opacity-35 md:flex">
+              {[100, 150, 120, 180, 110, 210, 140].map((height, index) => (
+                <div
+                  key={index}
+                  className="rounded-t-2xl border border-fuchsia-400/10 bg-white/5"
+                  style={{
+                    width: `${72 + (index % 3) * 22}px`,
+                    height: `${height}px`,
+                  }}
+                />
+              ))}
+            </div>
+
             <div className="relative z-10 mt-12 overflow-hidden md:mt-20">
               <motion.div
                 className="flex items-stretch"
@@ -94,55 +108,16 @@ export default function CityView() {
               </motion.div>
             </div>
 
-            <div className="pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2">
-              <div className="relative">
-                <div className="absolute left-1/2 top-full h-8 w-24 -translate-x-1/2 rounded-full bg-fuchsia-500/40 blur-2xl" />
-                <div className="flex items-end gap-1.5">
-                  <div className="h-6 w-6 rounded-full border border-fuchsia-300/30 bg-zinc-900 shadow-[0_0_18px_rgba(168,85,247,0.25)]" />
-                  <div className="mb-2 h-8 w-20 rounded-[1.2rem] border border-fuchsia-300/30 bg-gradient-to-r from-violet-700 to-fuchsia-500 shadow-[0_0_24px_rgba(168,85,247,0.4)]" />
-                  <div className="h-6 w-6 rounded-full border border-fuchsia-300/30 bg-zinc-900 shadow-[0_0_18px_rgba(168,85,247,0.25)]" />
-                </div>
-              </div>
-            </div>
+            <Motorcycle activeIndex={activeIndex} />
           </section>
 
-          <footer className="relative z-20 flex flex-col gap-4 pb-2 md:flex-row md:items-end md:justify-between">
-            <div className="rounded-[1.75rem] border border-fuchsia-400/20 bg-black/25 p-4 backdrop-blur-xl md:max-w-md">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300/70">
-                Current stop
-              </p>
-              <h2 className="mt-2 text-xl font-semibold text-white">
-                {activeSection.title}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-zinc-300">
-                {activeSection.description}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={goPrev}
-                className="rounded-2xl border border-fuchsia-400/20 bg-black/25 px-4 py-3 text-sm font-medium text-white backdrop-blur-xl transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10"
-              >
-                <span className="inline-flex items-center gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Prev
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={goNext}
-                className="rounded-2xl border border-fuchsia-400/20 bg-black/25 px-4 py-3 text-sm font-medium text-white backdrop-blur-xl transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10"
-              >
-                <span className="inline-flex items-center gap-2">
-                  Next
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </button>
-            </div>
-          </footer>
+          <StreetHUD
+            activeSection={activeSection}
+            activeIndex={activeIndex}
+            total={sections.length}
+            onPrev={goPrev}
+            onNext={goNext}
+          />
         </div>
       </div>
     </main>
