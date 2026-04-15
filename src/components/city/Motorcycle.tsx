@@ -7,9 +7,9 @@ type MotorcycleProps = {
 export default function Motorcycle({ activeIndex }: MotorcycleProps) {
   return (
     <motion.div
-      animate={{ x: activeIndex * 2 }}
+      animate={{ x: activeIndex * 2, rotate: activeIndex % 2 === 0 ? -2 : 2 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className="pointer-events-none absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+      className="pointer-events-none absolute bottom-2 left-1/2 z-20 -translate-x-1/2"
     >
       <div className="relative">
         <motion.div

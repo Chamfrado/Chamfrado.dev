@@ -80,11 +80,12 @@ export default function BuildingCard({
             <button
               type="button"
               onClick={onEnter}
+              disabled={!isActive}
               className={[
                 "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.25em] transition",
                 isActive
                   ? "border-fuchsia-300/30 bg-fuchsia-500/10 text-fuchsia-200 hover:bg-fuchsia-500/20"
-                  : "border-fuchsia-400/10 bg-transparent text-zinc-500",
+                  : "cursor-not-allowed border-fuchsia-400/10 bg-transparent text-zinc-500",
               ].join(" ")}
             >
               Enter

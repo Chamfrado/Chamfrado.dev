@@ -1,22 +1,95 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { sections } from "../../data/sections";
-import BuildingCard from "./BuildingCard";
+import Building from "./Building";
+import CRTPanel from "./CRTPanel";
 import Motorcycle from "./Motorcycle";
 import StreetHUD from "./StreetHUD";
 
-const CARD_WIDTH_MOBILE = 320;
-const CARD_WIDTH_DESKTOP = 420;
-const CARD_GAP = 20;
+const CARD_WIDTH_MOBILE = 280;
+const CARD_WIDTH_DESKTOP = 360;
+const CARD_GAP = 56;
 
 function getCardWidth() {
   if (typeof window === "undefined") return CARD_WIDTH_DESKTOP;
   return window.innerWidth < 768 ? CARD_WIDTH_MOBILE : CARD_WIDTH_DESKTOP;
 }
 
+function Stars() {
+  const dots = Array.from({ length: 60 }, (_, index) => ({
+    id: index,
+    top: `${(index * 37) % 100}%`,
+    left: `${(index * 17) % 100}%`,
+    opacity: 0.25 + ((index * 13) % 60) / 100,
+  }));
+
+  return (
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      {dots.map((dot) => (
+        <div
+          key={dot.id}
+          className="absolute h-[2px] w-[2px] rounded-full bg-white"
+          style={{ top: dot.top, left: dot.left, opacity: dot.opacity }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function RoadLights() {
+  return (
+    <div className="pointer-events-none absolute bottom-20 left-0 right-0 z-10 overflow-hidden">
+      {[0, 1, 2, 3, 4, 5].map((index) => (
+        <motion.div
+          key={index}
+          initial={{ x: "-20%" }}
+          animate={{ x: "120%" }}
+          transition={{
+            duration: 2.4 + index * 0.35,
+            repeat: Infinity,
+            ease: "linear",
+            delay: index * 0.28,
+          }}
+          className="mb-2 h-[2px] w-24 bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent"
+        />
+      ))}
+    </div>
+  );
+}
+
+function Skyline() {
+  const buildings = [100, 150, 120, 180, 110, 210, 140];
+
+  return (
+    <div className="pointer-events-none absolute inset-x-0 top-16 hidden items-end justify-between opacity-30 md:flex">
+      {buildings.map((height, index) => (
+        <div
+          key={index}
+          className="relative overflow-hidden rounded-t-2xl border border-fuchsia-400/10 bg-gradient-to-t from-black via-zinc-900 to-transparent"
+          style={{ width: `${72 + (index % 3) * 22}px`, height: `${height}px` }}
+        >
+          <div className="absolute inset-0 opacity-20">
+            <div className="grid grid-cols-4 gap-[2px] p-1">
+              {Array.from({ length: 20 }, (_, windowIndex) => (
+                <div
+                  key={windowIndex}
+                  className="h-[4px] w-full bg-fuchsia-300/40"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function CityView() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(getCardWidth());
+  const [selectedSectionId, setSelectedSectionId] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     const onResize = () => setCardWidth(getCardWidth());
@@ -24,7 +97,13 @@ export default function CityView() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const activeSection = sections[activeIndex];
+  const activeSection = useMemo(() => sections[activeIndex], [activeIndex]);
+
+  const selectedSection = useMemo(
+    () => sections.find((section) => section.id === selectedSectionId) ?? null,
+    [selectedSectionId],
+  );
+
   const step = cardWidth + CARD_GAP;
   const trackOffset = activeIndex * step;
 
@@ -41,9 +120,13 @@ export default function CityView() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#07030E] text-white">
       <div className="relative min-h-screen bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.22),transparent_40%),linear-gradient(to_bottom,#0b0613,#090612_55%,#05030a)]">
-        <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:32px_32px]" />
+        <Stars />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.25),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_10%,rgba(34,211,238,0.15),transparent_40%)]" />
+
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute inset-x-0 bottom-24 h-px bg-fuchsia-400/15" />
+        <div className="absolute bottom-24 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400 to-transparent animate-pulse" />
         <div className="absolute inset-x-0 bottom-28 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400/40 to-transparent" />
 
         <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 py-6 md:px-8">
@@ -60,23 +143,12 @@ export default function CityView() {
             </p>
           </header>
 
-          <section className="relative flex-1 py-8 md:py-10">
-            <div className="pointer-events-none absolute inset-x-0 top-10 hidden items-end justify-between opacity-35 md:flex">
-              {[100, 150, 120, 180, 110, 210, 140].map((height, index) => (
-                <div
-                  key={index}
-                  className="rounded-t-2xl border border-fuchsia-400/10 bg-white/5"
-                  style={{
-                    width: `${72 + (index % 3) * 22}px`,
-                    height: `${height}px`,
-                  }}
-                />
-              ))}
-            </div>
+          <section className="relative flex-1 py-12 md:py-16">
+            <Skyline />
 
-            <div className="relative z-10 mt-12 overflow-hidden md:mt-20">
+            <div className="relative z-10 mt-20 overflow-hidden md:mt-24">
               <motion.div
-                className="flex items-stretch"
+                className="flex items-end"
                 animate={{
                   x: `calc(50% - ${cardWidth / 2}px - ${trackOffset}px)`,
                 }}
@@ -88,26 +160,28 @@ export default function CityView() {
                   if (info.offset.x < -50) goNext();
                   if (info.offset.x > 50) goPrev();
                 }}
-                style={{ gap: `${CARD_GAP}px` }}
+                style={{ gap: "80px" }}
               >
                 {sections.map((section, index) => (
                   <div
                     key={section.id}
+                    className="flex items-end justify-center"
                     style={{
                       width: `${cardWidth}px`,
                       flex: `0 0 ${cardWidth}px`,
                     }}
                   >
-                    <BuildingCard
+                    <Building
                       section={section}
                       isActive={index === activeIndex}
-                      onEnter={() => {}}
+                      onEnter={() => setSelectedSectionId(section.id)}
                     />
                   </div>
                 ))}
               </motion.div>
             </div>
 
+            <RoadLights />
             <Motorcycle activeIndex={activeIndex} />
           </section>
 
@@ -119,6 +193,12 @@ export default function CityView() {
             onNext={goNext}
           />
         </div>
+
+        <CRTPanel
+          open={!!selectedSection}
+          section={selectedSection}
+          onClose={() => setSelectedSectionId(null)}
+        />
       </div>
     </main>
   );
