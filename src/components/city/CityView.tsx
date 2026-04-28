@@ -65,11 +65,15 @@ function RoadLights() {
   );
 }
 
-function Skyline() {
+function Skyline({ offset }: { offset: number }) {
   const buildings = [100, 150, 120, 180, 110, 210, 140];
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-20 hidden items-end justify-between opacity-15 md:flex">
+    <motion.div
+      className="pointer-events-none absolute inset-x-0 top-20 hidden items-end justify-between opacity-15 md:flex"
+      animate={{ x: -offset }}
+      transition={{ type: "spring", stiffness: 70, damping: 24 }}
+    >
       {buildings.map((height, index) => (
         <div
           key={index}
@@ -88,7 +92,7 @@ function Skyline() {
           </div>
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 }
 
@@ -115,6 +119,8 @@ export default function CityView() {
   const step = cardWidth + CARD_GAP;
   const visualOffset = VISUAL_OFFSET[sections[activeIndex].id] ?? 0;
   const trackOffset = activeIndex * step + visualOffset;
+  const skyOffset = trackOffset * 0.08;
+  const skylineOffset = trackOffset * 0.25;
 
   const goPrev = () => {
     setActiveIndex((prev) => (prev === 0 ? 0 : prev - 1));
@@ -129,7 +135,13 @@ export default function CityView() {
   return (
     <main className="h-screen overflow-hidden bg-[#07030E] text-white">
       <div className="relative h-screen overflow-hidden bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.22),transparent_40%),linear-gradient(to_bottom,#0b0613,#090612_55%,#05030a)]">
-        <Stars />
+        <motion.div
+          className="absolute inset-0"
+          animate={{ x: -skyOffset }}
+          transition={{ type: "spring", stiffness: 70, damping: 24 }}
+        >
+          <Stars />
+        </motion.div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.25),transparent_40%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_10%,rgba(34,211,238,0.15),transparent_40%)]" />
 
@@ -153,7 +165,7 @@ export default function CityView() {
           </header>
 
           <section className="relative flex-1 py-4 md:py-6">
-            <Skyline />
+            <Skyline offset={skylineOffset} />
 
             <div className="relative z-10 mt-2 overflow-x-hidden overflow-y-visible md:mt-4">
               <motion.div
