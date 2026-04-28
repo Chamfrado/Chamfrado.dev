@@ -25,7 +25,7 @@ export default function Building({
       <div
         className={[
           "absolute bottom-3 h-8 w-32 rounded-full blur-2xl transition",
-          isActive ? "bg-fuchsia-500/45" : "bg-fuchsia-500/12",
+          isActive ? "bg-fuchsia-500/55 animate-pulse" : "bg-fuchsia-500/8",
         ].join(" ")}
       />
 
@@ -34,9 +34,17 @@ export default function Building({
         alt={section.title}
         className="relative z-10 max-h-[300px] w-auto select-none object-contain md:max-h-[360px]"
         animate={{
+          y: isActive ? [0, -3, 0] : 0,
           filter: isActive
-            ? "drop-shadow(0 0 20px rgba(168,85,247,0.35))"
-            : "drop-shadow(0 0 8px rgba(168,85,247,0.12))",
+            ? "drop-shadow(0 0 24px rgba(168,85,247,0.45))"
+            : "drop-shadow(0 0 8px rgba(168,85,247,0.08))",
+        }}
+        transition={{
+          y: {
+            duration: 2.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          },
         }}
       />
 

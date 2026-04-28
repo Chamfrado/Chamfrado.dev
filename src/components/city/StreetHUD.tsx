@@ -46,7 +46,7 @@ export default function StreetHUD({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="hidden items-center gap-3 md:flex">
         <button
           type="button"
           onClick={onPrev}
