@@ -119,8 +119,8 @@ export default function CityView() {
   const step = cardWidth + CARD_GAP;
   const visualOffset = VISUAL_OFFSET[sections[activeIndex].id] ?? 0;
   const trackOffset = activeIndex * step + visualOffset;
-  const skyOffset = trackOffset * 0.08;
-  const skylineOffset = trackOffset * 0.25;
+  const skyOffset = trackOffset * 0.03;
+  const skylineOffset = trackOffset * 0.12;
 
   const goPrev = () => {
     setActiveIndex((prev) => (prev === 0 ? 0 : prev - 1));
@@ -171,9 +171,9 @@ export default function CityView() {
               <motion.div
                 className="flex items-end"
                 animate={{
-                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset}px + 10px)`,
+                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset * 0.9}px + 10px)`,
                 }}
-                transition={{ type: "spring", stiffness: 90, damping: 20 }}
+                transition={{ type: "spring", stiffness: 70, damping: 22 }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.04}
