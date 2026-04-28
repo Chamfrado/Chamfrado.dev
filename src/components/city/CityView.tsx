@@ -6,9 +6,17 @@ import CRTPanel from "./CRTPanel";
 import Motorcycle from "./Motorcycle";
 import StreetHUD from "./StreetHUD";
 
-const CARD_WIDTH_MOBILE = 280;
-const CARD_WIDTH_DESKTOP = 360;
-const CARD_GAP = 56;
+const CARD_WIDTH_MOBILE = 320;
+const CARD_WIDTH_DESKTOP = 460;
+const CARD_GAP = 110;
+
+const VISUAL_OFFSET: Record<string, number> = {
+  career: 0,
+  bio: 0,
+  projects: 0,
+  links: -20, // ðŸ‘ˆ THIS is your current issue
+  contact: -10,
+};
 
 function getCardWidth() {
   if (typeof window === "undefined") return CARD_WIDTH_DESKTOP;
@@ -105,7 +113,8 @@ export default function CityView() {
   );
 
   const step = cardWidth + CARD_GAP;
-  const trackOffset = activeIndex * step;
+  const visualOffset = VISUAL_OFFSET[sections[activeIndex].id] ?? 0;
+  const trackOffset = activeIndex * step + visualOffset;
 
   const goPrev = () => {
     setActiveIndex((prev) => (prev === 0 ? 0 : prev - 1));
@@ -150,7 +159,7 @@ export default function CityView() {
               <motion.div
                 className="flex items-end"
                 animate={{
-                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset}px)`,
+                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset}px + 10px)`,
                 }}
                 transition={{ type: "spring", stiffness: 90, damping: 20 }}
                 drag="x"
