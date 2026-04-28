@@ -118,8 +118,8 @@ export default function CityView() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#07030E] text-white">
-      <div className="relative min-h-screen bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.22),transparent_40%),linear-gradient(to_bottom,#0b0613,#090612_55%,#05030a)]">
+    <main className="h-screen overflow-hidden bg-[#07030E] text-white">
+      <div className="relative h-screen overflow-hidden bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.22),transparent_40%),linear-gradient(to_bottom,#0b0613,#090612_55%,#05030a)]">
         <Stars />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.25),transparent_40%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_10%,rgba(34,211,238,0.15),transparent_40%)]" />
@@ -129,7 +129,7 @@ export default function CityView() {
         <div className="absolute bottom-24 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400 to-transparent animate-pulse" />
         <div className="absolute inset-x-0 bottom-28 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400/40 to-transparent" />
 
-        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 py-6 md:px-8">
+        <div className="relative mx-auto flex h-screen max-w-7xl flex-col justify-between px-4 py-4 md:px-8">
           <header className="pt-2">
             <p className="text-[10px] uppercase tracking-[0.45em] text-fuchsia-300/75">
               chamfrado.dev
@@ -143,10 +143,10 @@ export default function CityView() {
             </p>
           </header>
 
-          <section className="relative flex-1 py-12 md:py-16">
+          <section className="relative flex-1 py-4 md:py-6">
             <Skyline />
 
-            <div className="relative z-10 mt-20 overflow-hidden md:mt-24">
+            <div className="relative z-10 mt-2 overflow-x-hidden overflow-y-visible md:mt-4">
               <motion.div
                 className="flex items-end"
                 animate={{

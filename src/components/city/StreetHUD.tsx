@@ -17,8 +17,8 @@ export default function StreetHUD({
   onNext,
 }: StreetHUDProps) {
   return (
-    <footer className="relative z-20 flex flex-col gap-4 pb-2 md:flex-row md:items-end md:justify-between">
-      <div className="rounded-[1.75rem] border border-fuchsia-400/20 bg-black/25 p-4 backdrop-blur-xl md:max-w-md">
+    <footer className="relative z-20 mt-4 flex flex-col gap-4 pb-6 md:mt-0 md:flex-row md:items-end md:justify-between">
+      <div className="rounded-[1.75rem] border border-fuchsia-400/20 bg-black/25 p-4 backdrop-blur-xl md:max-w-[360px]">
         <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-300/70">
           Current stop
         </p>
@@ -34,7 +34,7 @@ export default function StreetHUD({
           </span>
         </div>
 
-        <p className="mt-2 text-sm leading-6 text-zinc-300">
+        <p className="mt-2 text-sm leading-6 text-zinc-400">
           {activeSection.description}
         </p>
 
