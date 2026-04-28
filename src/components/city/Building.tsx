@@ -14,11 +14,11 @@ export default function Building({
 }: BuildingProps) {
   return (
     <motion.div
-      className="relative flex h-[360px] items-end justify-center md:h-[430px]"
+      className="relative flex h-[400px] items-end justify-center md:h-[500px]"
       animate={{
         y: isActive ? -8 : 8,
-        scale: isActive ? 1 : 0.9,
-        opacity: isActive ? 1 : 0.5,
+        scale: isActive ? 1 : 0.78,
+        opacity: isActive ? 1 : 0.18,
       }}
       transition={{ type: "spring", stiffness: 120, damping: 18 }}
     >
@@ -40,7 +40,7 @@ export default function Building({
         }}
       />
 
-      <div className="absolute bottom-0 z-20 translate-y-1/2">
+      <div className="absolute bottom-2 z-20 translate-y-1/2">
         <div
           className={[
             "rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.25em] backdrop-blur-xl transition",

@@ -69,7 +69,7 @@ function Skyline() {
   const buildings = [100, 150, 120, 180, 110, 210, 140];
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-16 hidden items-end justify-between opacity-30 md:flex">
+    <div className="pointer-events-none absolute inset-x-0 top-20 hidden items-end justify-between opacity-15 md:flex">
       {buildings.map((height, index) => (
         <div
           key={index}

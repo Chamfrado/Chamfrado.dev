@@ -7,9 +7,9 @@ type MotorcycleProps = {
 export default function Motorcycle({ activeIndex }: MotorcycleProps) {
   return (
     <motion.div
-      animate={{ x: activeIndex * 2, rotate: activeIndex % 2 === 0 ? -2 : 2 }}
+      animate={{ rotate: activeIndex % 2 === 0 ? -2 : 2 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className="pointer-events-none absolute bottom-2 left-1/2 z-20 -translate-x-1/2"
+      className="pointer-events-none absolute bottom-0 left-1/2 z-20 -translate-x-1/2"
     >
       <div className="relative">
         <motion.div
@@ -24,8 +24,8 @@ export default function Motorcycle({ activeIndex }: MotorcycleProps) {
           className="flex items-end gap-1.5"
         >
           <div className="h-6 w-6 rounded-full border border-fuchsia-300/30 bg-zinc-900 shadow-[0_0_18px_rgba(168,85,247,0.25)]" />
-          <div className="mb-2 h-8 w-20 rounded-[1.2rem] border border-fuchsia-300/30 bg-gradient-to-r from-violet-700 to-fuchsia-500 shadow-[0_0_24px_rgba(168,85,247,0.4)]" />
-          <div className="h-6 w-6 rounded-full border border-fuchsia-300/30 bg-zinc-900 shadow-[0_0_18px_rgba(168,85,247,0.25)]" />
+          <div className="mb-1 h-7 w-16 rounded-[1rem] border border-fuchsia-300/30 bg-gradient-to-r from-violet-700 to-fuchsia-500 shadow-[0_0_24px_rgba(168,85,247,0.4)]" />
+          <div className="h-5 w-5 rounded-full border border-fuchsia-300/30 bg-zinc-900 shadow-[0_0_18px_rgba(168,85,247,0.25)]" />
         </motion.div>
       </div>
     </motion.div>
