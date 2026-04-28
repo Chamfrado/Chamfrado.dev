@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { sections } from "../../data/sections";
 import Building from "./Building";
 import CRTPanel from "./CRTPanel";
+import MobileCityControls from "./MobileCityControls";
 import Motorcycle from "./Motorcycle";
 import StreetHUD from "./StreetHUD";
 
@@ -15,7 +15,7 @@ const VISUAL_OFFSET: Record<string, number> = {
   career: 0,
   bio: 0,
   projects: 0,
-  links: -20, // ðŸ‘ˆ THIS is your current issue
+  links: -20,
   contact: -10,
 };
 
@@ -216,49 +216,14 @@ export default function CityView() {
           />
         </div>
 
-        <div className="fixed inset-x-0 bottom-0 z-40 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
-          <div className="mx-auto grid max-w-md grid-cols-[3.25rem_1fr_3.25rem] items-center gap-3 rounded-[1.5rem] border border-fuchsia-400/25 bg-black/70 p-3 shadow-[0_0_28px_rgba(168,85,247,0.25)] backdrop-blur-xl">
-            <button
-              type="button"
-              onClick={goPrev}
-              disabled={activeIndex === 0}
-              className="flex h-12 w-12 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 disabled:cursor-not-allowed disabled:opacity-35"
-              aria-label="Previous stop"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </button>
-
-            <div className="min-w-0 text-center">
-              <div className="flex min-w-0 items-center justify-center gap-2">
-                <p className="truncate text-[10px] uppercase tracking-[0.24em] text-cyan-300/80">
-                  {activeSection.title}
-                </p>
-                <span className="shrink-0 rounded-full border border-fuchsia-400/20 bg-fuchsia-500/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-fuchsia-200">
-                  {String(activeIndex + 1).padStart(2, "0")} /{" "}
-                  {String(sections.length).padStart(2, "0")}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedSectionId(activeSection.id)}
-                className="mt-2 w-full rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100 shadow-[0_0_20px_rgba(34,211,238,0.18)] transition hover:border-cyan-200/50 hover:bg-cyan-300/15"
-              >
-                Enter
-              </button>
-            </div>
-
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={activeIndex === sections.length - 1}
-              className="flex h-12 w-12 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 disabled:cursor-not-allowed disabled:opacity-35"
-              aria-label="Next stop"
-            >
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
+        <MobileCityControls
+          activeSection={activeSection}
+          activeIndex={activeIndex}
+          total={sections.length}
+          onPrev={goPrev}
+          onNext={goNext}
+          onEnter={() => setSelectedSectionId(activeSection.id)}
+        />
 
         <CRTPanel
           open={!!selectedSection}

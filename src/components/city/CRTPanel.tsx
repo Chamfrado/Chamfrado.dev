@@ -17,14 +17,14 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 p-3 backdrop-blur-md md:items-center md:p-6"
+          className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/75 p-0 backdrop-blur-md md:items-center md:p-6"
         >
           <motion.div
             initial={{ y: 28, opacity: 0, scale: 0.97 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 16, opacity: 0, scale: 0.98 }}
             transition={{ type: "spring", stiffness: 220, damping: 24 }}
-            className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-fuchsia-400/30 bg-zinc-950 shadow-[0_0_40px_rgba(168,85,247,0.35)]"
+            className="relative flex h-full w-full max-w-5xl flex-col overflow-hidden border border-fuchsia-400/30 bg-zinc-950 shadow-[0_0_40px_rgba(168,85,247,0.35)] md:h-auto md:max-h-[90vh] md:rounded-[2rem]"
           >
             <motion.div
               animate={{ opacity: [0.98, 1, 0.97, 1] }}
@@ -35,7 +35,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
             <div className="absolute inset-0 pointer-events-none mix-blend-overlay bg-fuchsia-500/5" />
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.32)_100%)]" />
 
-            <div className="relative flex items-center justify-between gap-4 border-b border-fuchsia-400/20 bg-zinc-900/80 px-4 py-3 md:px-6 md:py-4">
+            <div className="relative flex shrink-0 items-center justify-between gap-4 border-b border-fuchsia-400/20 bg-zinc-900/80 px-4 py-3 md:px-6 md:py-4">
               <div>
                 <p className="text-[10px] uppercase tracking-[0.35em] text-fuchsia-300/75">
                   Old TV Output
@@ -55,7 +55,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
               </button>
             </div>
 
-            <div className="relative grid gap-6 px-4 py-5 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:py-6">
+            <div className="relative grid min-h-0 flex-1 gap-6 overflow-y-auto px-4 py-5 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:py-6">
               <div className="rounded-[1.5rem] border border-fuchsia-400/20 bg-black/40 p-4 shadow-inner shadow-fuchsia-500/10 md:p-6">
                 <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">
                   Broadcast

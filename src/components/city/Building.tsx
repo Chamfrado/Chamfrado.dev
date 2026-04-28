@@ -14,7 +14,7 @@ export default function Building({
 }: BuildingProps) {
   return (
     <motion.div
-      className="relative flex h-[400px] items-end justify-center md:h-[500px]"
+      className="group relative flex h-[400px] items-end justify-center md:h-[500px]"
       animate={{
         y: isActive ? -8 : 8,
         scale: isActive ? 1 : 0.78,
@@ -48,6 +48,17 @@ export default function Building({
         }}
       />
 
+      {isActive && (
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: [0.55, 1, 0.55], y: 0 }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          className="pointer-events-none absolute bottom-12 left-1/2 z-20 hidden -translate-x-1/2 rounded-full border border-cyan-300/30 bg-black/45 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.18)] backdrop-blur-xl md:block"
+        >
+          Click to enter
+        </motion.div>
+      )}
+
       <div className="absolute bottom-2 z-20 translate-y-1/2">
         <div
           className={[
@@ -62,8 +73,9 @@ export default function Building({
       </div>
 
       <button
+        type="button"
         onClick={onEnter}
-        className="absolute inset-0 z-30"
+        className="absolute inset-0 z-30 rounded-[2rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
         aria-label={`Enter ${section.title}`}
       />
     </motion.div>
