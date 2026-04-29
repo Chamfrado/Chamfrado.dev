@@ -14,11 +14,11 @@ export default function Building({
 }: BuildingProps) {
   return (
     <motion.div
-      className="group relative flex h-[42vh] max-h-[300px] items-end justify-center min-[390px]:h-[45vh] min-[390px]:max-h-[330px] md:h-[56vh] md:max-h-[500px]"
+      className="group relative flex h-[42vh] max-h-[320px] items-end justify-center min-[390px]:h-[45vh] min-[390px]:max-h-[350px] md:h-[58vh] md:max-h-[520px]"
       animate={{
         y: isActive ? -8 : 8,
-        scale: isActive ? 1 : 0.78,
-        opacity: isActive ? 1 : 0.18,
+        scale: isActive ? 1 : 0.8,
+        opacity: isActive ? 1 : 0.22,
       }}
       whileHover={{
         y: isActive ? -12 : 2,
@@ -38,9 +38,10 @@ export default function Building({
       />
 
       <motion.img
-        src={`/buildings/${section.id}.png`}
+        src={`/assets/buildings-cutout/${section.id}.png`}
         alt={section.title}
-        className="relative z-10 max-h-[34vh] w-auto select-none object-contain transition duration-300 group-hover:brightness-110 min-[390px]:max-h-[36vh] md:max-h-[42vh]"
+        className="relative z-10 max-h-[34vh] w-auto select-none object-contain transition duration-300 group-hover:brightness-110 min-[390px]:max-h-[37vh] md:max-h-[46vh]"
+        draggable={false}
         animate={{
           y: isActive ? [0, -3, 0] : 0,
           filter: isActive
@@ -63,7 +64,7 @@ export default function Building({
           transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
           className="pointer-events-none absolute bottom-12 left-1/2 z-20 hidden -translate-x-1/2 rounded-full border border-cyan-300/30 bg-black/45 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.18)] backdrop-blur-xl md:block"
         >
-          Enter district
+          Click to enter
         </motion.div>
       )}
 

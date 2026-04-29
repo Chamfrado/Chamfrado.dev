@@ -7,16 +7,16 @@ import MobileCityControls from "./MobileCityControls";
 import Motorcycle from "./Motorcycle";
 import StreetHUD from "./StreetHUD";
 
-const CARD_WIDTH_MOBILE = 320;
-const CARD_WIDTH_DESKTOP = 460;
-const CARD_GAP = 110;
+const CARD_WIDTH_MOBILE = 340;
+const CARD_WIDTH_DESKTOP = 520;
+const CARD_GAP = 160;
 
 const VISUAL_OFFSET: Record<string, number> = {
   career: 0,
   bio: 0,
   projects: 0,
-  links: -20,
-  contact: -10,
+  links: 0,
+  contact: 0,
 };
 
 function getCardWidth() {
@@ -66,34 +66,42 @@ function RoadLights() {
   );
 }
 
-function Skyline({ offset }: { offset: number }) {
-  const buildings = [100, 150, 120, 180, 110, 210, 140];
-
+function SpriteBackdrop({
+  skylineOffset,
+  roadOffset,
+}: {
+  skylineOffset: number;
+  roadOffset: number;
+}) {
   return (
-    <motion.div
-      className="pointer-events-none absolute inset-x-0 top-20 hidden items-end justify-between opacity-15 md:flex"
-      animate={{ x: -offset }}
-      transition={{ type: "spring", stiffness: 70, damping: 24 }}
-    >
-      {buildings.map((height, index) => (
-        <div
-          key={index}
-          className="relative overflow-hidden rounded-t-2xl border border-fuchsia-400/10 bg-gradient-to-t from-black via-zinc-900 to-transparent"
-          style={{ width: `${72 + (index % 3) * 22}px`, height: `${height}px` }}
-        >
-          <div className="absolute inset-0 opacity-20">
-            <div className="grid grid-cols-4 gap-[2px] p-1">
-              {Array.from({ length: 20 }, (_, windowIndex) => (
-                <div
-                  key={windowIndex}
-                  className="h-[4px] w-full bg-fuchsia-300/40"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-    </motion.div>
+    <>
+      <motion.img
+        src="/assets/skyline/skyline.png"
+        alt=""
+        className="pointer-events-none absolute left-0 top-10 z-[1] h-[30vh] min-h-[180px] w-[220%] max-w-none object-cover object-bottom opacity-35 md:top-8 md:h-[36vh]"
+        animate={{ x: -skylineOffset }}
+        transition={{ type: "spring", stiffness: 70, damping: 24 }}
+        aria-hidden="true"
+      />
+
+      <motion.img
+        src="/assets/skyline/mid-buildings.png"
+        alt=""
+        className="pointer-events-none absolute bottom-[calc(11rem+env(safe-area-inset-bottom))] left-0 z-[2] h-[20vh] min-h-[125px] w-[220%] max-w-none object-cover object-bottom opacity-35 md:bottom-36 md:h-[24vh]"
+        animate={{ x: -skylineOffset * 1.35 }}
+        transition={{ type: "spring", stiffness: 70, damping: 24 }}
+        aria-hidden="true"
+      />
+
+      <motion.img
+        src="/assets/road/road-base.png"
+        alt=""
+        className="pointer-events-none absolute bottom-[calc(5.75rem+env(safe-area-inset-bottom))] left-0 z-[3] h-[22vh] min-h-[150px] w-[240%] max-w-none object-cover object-center opacity-95 md:bottom-0 md:h-[27vh]"
+        animate={{ x: -roadOffset }}
+        transition={{ type: "spring", stiffness: 70, damping: 24 }}
+        aria-hidden="true"
+      />
+    </>
   );
 }
 
@@ -122,6 +130,7 @@ export default function CityView() {
   const trackOffset = activeIndex * step + visualOffset;
   const skyOffset = trackOffset * 0.03;
   const skylineOffset = trackOffset * 0.12;
+  const roadOffset = trackOffset * 0.4;
 
   const goPrev = () => {
     setActiveIndex((prev) => (prev === 0 ? 0 : prev - 1));
@@ -145,6 +154,10 @@ export default function CityView() {
         </motion.div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.25),transparent_40%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_10%,rgba(34,211,238,0.15),transparent_40%)]" />
+        <SpriteBackdrop
+          skylineOffset={skylineOffset}
+          roadOffset={roadOffset}
+        />
 
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
         <div className="absolute inset-x-0 bottom-24 h-px bg-fuchsia-400/15" />
@@ -166,13 +179,11 @@ export default function CityView() {
           </header>
 
           <section className="relative min-h-0 flex-1 py-4 md:py-6">
-            <Skyline offset={skylineOffset} />
-
             <div className="relative z-10 mt-2 overflow-x-hidden overflow-y-visible md:mt-4">
               <motion.div
                 className="flex items-end"
                 animate={{
-                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset * 0.9}px + 10px)`,
+                  x: `calc(50% - ${cardWidth / 2}px - ${trackOffset}px)`,
                 }}
                 transition={{ type: "spring", stiffness: 70, damping: 22 }}
                 drag="x"
@@ -182,7 +193,7 @@ export default function CityView() {
                   if (info.offset.x < -50) goNext();
                   if (info.offset.x > 50) goPrev();
                 }}
-                style={{ gap: "80px" }}
+                style={{ gap: `${CARD_GAP}px` }}
               >
                 {sections.map((section, index) => (
                   <div
