@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Chamfrado.dev
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chamfrado.dev is a personal portfolio built as a neon city interface. Visitors move through districts for career, bio, projects, links, and contact, then open CRT-style panels for more detail.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide React
 
-## React Compiler
+## Local Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Install dependencies:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start the development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run lint checks:
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+- `src/components/city`: city scene, buildings, controls, HUD, and CRT panel UI.
+- `src/data/sections.ts`: portfolio district metadata.
+- `public/buildings`: building artwork used by each district.
+
+## Featured Projects
+
+- Chamfrado.dev: personal portfolio built with React, Tailwind CSS, and Vite.
+- PlantaHUB: company website and platform foundation built with Java, React, PostgreSQL, Spring Boot, Tailwind CSS, and Vite.
+- Shelfy: offline desktop app for book inventory and loan control built with Electron, HTML, and CSS.
+
+## Contact
+
+- Email: [prog.lohran@gmail.com](mailto:prog.lohran@gmail.com)
+- WhatsApp: [+55 (35) 9 9202-5205](https://wa.me/5535992025205)
+- GitHub: [Chamfrado](https://github.com/Chamfrado)
+- LinkedIn: [Lohran Cintra](https://www.linkedin.com/in/lohrancintra)
+- Website: [chamfrado.dev](https://chamfrado.dev)
