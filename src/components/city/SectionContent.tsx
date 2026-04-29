@@ -1,14 +1,133 @@
 import {
+  ArrowRight,
   Briefcase,
   Code2,
   ExternalLink,
-  Gamepad2,
   Globe,
   Mail,
+  MessageSquare,
+  MessageCircle,
+  Phone,
   Sparkles,
   UserRound,
 } from "lucide-react";
 import type { SectionItem } from "../../types/section";
+
+type IconType = React.ComponentType<{ className?: string }>;
+
+type ActionLinkProps = {
+  href: string;
+  children: React.ReactNode;
+  external?: boolean;
+};
+
+type ProjectLink = {
+  label: string;
+  href: string;
+};
+
+type ProjectItem = {
+  title: string;
+  status: string;
+  description: string;
+  stack: string[];
+  links: ProjectLink[];
+};
+
+const contactLinks = {
+  email: "mailto:prog.lohran@gmail.com",
+  github: "https://github.com/Chamfrado",
+  linkedin: "https://www.linkedin.com/in/lohrancintra",
+  website: "https://chamfrado.dev",
+  whatsapp: "https://wa.me/5535992025205",
+  phone: "tel:+5535992025205",
+};
+
+const stackGroups = [
+  {
+    title: "Frontend",
+    items: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+  },
+  {
+    title: "Backend",
+    items: ["Java", "Spring Boot", "PostgreSQL", "REST APIs"],
+  },
+  {
+    title: "Product",
+    items: ["Company sites", "Desktop apps", "Portfolio systems", "Interactive UX"],
+  },
+];
+
+const projects: ProjectItem[] = [
+  {
+    title: "Chamfrado.dev",
+    status: "Work in progress",
+    description:
+      "My personal website: a neon city portfolio with animated buildings, CRT panels, and mobile-first navigation.",
+    stack: ["React", "Tailwind CSS", "Vite"],
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Chamfrado/Chamfrado.dev",
+      },
+    ],
+  },
+  {
+    title: "PlantaHUB",
+    status: "v1.0 released",
+    description:
+      "A company website and platform foundation built with a full-stack Java and React workflow.",
+    stack: ["Java", "React", "PostgreSQL", "Spring Boot", "Tailwind CSS", "Vite"],
+    links: [
+      {
+        label: "Live site",
+        href: "https://www.plantahub.com.br",
+      },
+      {
+        label: "Repository",
+        href: "https://github.com/Chamfrado/PlantaHUB",
+      },
+    ],
+  },
+  {
+    title: "Shelfy",
+    status: "v1.0 released",
+    description:
+      "An offline desktop app for managing book inventory, lending records, and loan control.",
+    stack: ["Electron", "HTML", "CSS"],
+    links: [
+      {
+        label: "Download",
+        href: "https://github.com/Chamfrado/Shelfy/releases/tag/release",
+      },
+      {
+        label: "Repository",
+        href: "https://github.com/Chamfrado/Shelfy",
+      },
+    ],
+  },
+];
+
+const linkHub = [
+  {
+    label: "GitHub",
+    description: "Repositories, experiments, and source code.",
+    href: contactLinks.github,
+    icon: Code2,
+  },
+  {
+    label: "LinkedIn",
+    description: "Professional profile and work history.",
+    href: contactLinks.linkedin,
+    icon: Briefcase,
+  },
+  {
+    label: "chamfrado.dev",
+    description: "Main portfolio home base.",
+    href: contactLinks.website,
+    icon: Globe,
+  },
+];
 
 function InfoCard({
   title,
@@ -17,7 +136,7 @@ function InfoCard({
 }: {
   title: string;
   children: React.ReactNode;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconType;
 }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -33,30 +152,114 @@ function InfoCard({
   );
 }
 
+function ActionLink({ href, children, external = true }: ActionLinkProps) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+    >
+      {children}
+      {external ? (
+        <ExternalLink className="h-4 w-4" />
+      ) : (
+        <ArrowRight className="h-4 w-4" />
+      )}
+    </a>
+  );
+}
+
+function TagList({ items }: { items: string[] }) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      {items.map((item) => (
+        <span
+          key={item}
+          className="rounded-full border border-fuchsia-300/15 bg-fuchsia-500/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-fuchsia-100"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectCard({
+  title,
+  status,
+  description,
+  stack,
+  links,
+}: ProjectItem) {
+  return (
+    <article className="rounded-2xl border border-white/10 bg-black/25 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <h4 className="text-sm font-semibold text-white">{title}</h4>
+        <span className="shrink-0 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-cyan-200">
+          {status}
+        </span>
+      </div>
+      <p className="mt-3 text-sm leading-6 text-zinc-300">{description}</p>
+      <TagList items={stack} />
+      <div className="mt-4 flex flex-wrap gap-2">
+        {links.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+          >
+            {link.label}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 export default function SectionContent({ section }: { section: SectionItem }) {
   switch (section.id) {
     case "career":
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          <InfoCard title="Focus" icon={Briefcase}>
-            Front-end and back-end development, product building, teaching, and
-            crafting interactive digital experiences.
-          </InfoCard>
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <InfoCard title="Professional focus" icon={Briefcase}>
+              I build interfaces and product experiences that connect clean
+              engineering with strong visual identity. The focus is practical:
+              usable flows, maintainable code, and memorable interactions.
+            </InfoCard>
 
-          <InfoCard title="Stack" icon={Code2}>
-            React, TypeScript, Tailwind, Java, Spring Boot, APIs, relational
-            databases, UI systems, and scalable project structure.
-          </InfoCard>
+            <InfoCard title="Current direction" icon={Sparkles}>
+              Frontend-heavy product work, full-stack prototypes, teaching, and
+              interactive web experiences that feel more crafted than default.
+            </InfoCard>
+          </div>
 
-          <InfoCard title="What to show here" icon={Sparkles}>
-            Timeline, featured companies, teaching work, case studies,
-            certifications, and technology highlights.
-          </InfoCard>
+          <div className="grid gap-3 md:grid-cols-3">
+            {stackGroups.map((group) => (
+              <div
+                key={group.title}
+                className="rounded-2xl border border-white/10 bg-black/25 p-4"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                  {group.title}
+                </p>
+                <TagList items={group.items} />
+              </div>
+            ))}
+          </div>
 
-          <InfoCard title="Good CTA" icon={ExternalLink}>
-            Download résumé, view project history, open GitHub, or start a
-            conversation for freelance and product work.
-          </InfoCard>
+          <div className="flex flex-wrap gap-3">
+            <ActionLink href={contactLinks.email} external={false}>
+              Start a project
+            </ActionLink>
+            <ActionLink href={contactLinks.github}>
+              View code
+            </ActionLink>
+          </div>
         </div>
       );
 
@@ -64,99 +267,137 @@ export default function SectionContent({ section }: { section: SectionItem }) {
       return (
         <div className="grid gap-4 md:grid-cols-2">
           <InfoCard title="Identity" icon={UserRound}>
-            This area can present who you are, your mindset, what inspires you,
-            and the kind of creative and technical work you enjoy.
+            Chamfrado.dev is built around the idea that a portfolio can be a
+            place, not just a document. The style mixes web craft, game
+            interfaces, neon cities, and practical engineering into one
+            navigable experience.
           </InfoCard>
 
-          <InfoCard title="Tone" icon={Sparkles}>
-            Keep it personal but intentional. Use short story-driven blocks
-            instead of one long biography wall.
+          <InfoCard title="Working style" icon={Code2}>
+            I like systems that are expressive on the surface and simple under
+            the hood: clear components, strong interaction rules, and visuals
+            that help people understand where they are.
           </InfoCard>
 
-          <InfoCard title="Nice ideas" icon={Code2}>
-            Add a personal manifesto, favorite tools, fun facts, and your design
-            philosophy inside this retro TV layout.
+          <InfoCard title="Creative tone" icon={Sparkles}>
+            The mood is retro-futurist and hands-on: old screens, night streets,
+            arcade pacing, readable UI, and small details that make a site feel
+            alive without getting in the way.
           </InfoCard>
 
-          <InfoCard title="Good CTA" icon={ExternalLink}>
-            Invite the visitor to continue into Projects after they understand
-            the person behind the work.
+          <InfoCard title="What matters" icon={MessageSquare}>
+            Useful software, honest presentation, fast learning loops, and
+            turning technical ideas into experiences people can actually use.
           </InfoCard>
         </div>
       );
 
     case "projects":
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          <InfoCard title="Featured builds" icon={Gamepad2}>
-            Show your strongest projects first, especially the ones with clean
-            visuals, problem-solving, and real technical depth.
-          </InfoCard>
+        <div className="space-y-4">
+          <div className="grid gap-4">
+            {projects.map((project) => (
+              <ProjectCard key={project.title} {...project} />
+            ))}
+          </div>
 
-          <InfoCard title="Project card idea" icon={Code2}>
-            Each project can show name, stack, challenge, solution, screenshots,
-            and a direct link to repository or demo.
-          </InfoCard>
-
-          <InfoCard title="Nice categories" icon={Sparkles}>
-            Web apps, teaching materials, experiments, portfolio pieces,
-            business systems, and personal labs.
-          </InfoCard>
-
-          <InfoCard title="Good CTA" icon={ExternalLink}>
-            Open live demo, view repository, or read a mini case study directly
-            inside the CRT screen.
-          </InfoCard>
+          <div className="flex flex-wrap gap-3">
+            <ActionLink href={contactLinks.github}>
+              Open repositories
+            </ActionLink>
+            <ActionLink href={contactLinks.website}>
+              Visit chamfrado.dev
+            </ActionLink>
+          </div>
         </div>
       );
 
     case "links":
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          <InfoCard title="Main links" icon={Globe}>
-            GitHub, LinkedIn, portfolio references, live apps, teaching
-            materials, and any important platforms around your brand.
-          </InfoCard>
+        <div className="space-y-4">
+          <div className="grid gap-3">
+            {linkHub.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/25 p-4 transition hover:border-fuchsia-300/35 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+              >
+                <link.icon className="h-5 w-5 shrink-0 text-fuchsia-200" />
+                <span>
+                  <span className="block text-sm font-semibold text-white">
+                    {link.label}
+                  </span>
+                  <span className="mt-1 block text-sm leading-6 text-zinc-400">
+                    {link.description}
+                  </span>
+                </span>
+                <ExternalLink className="h-4 w-4 shrink-0 text-cyan-200 transition group-hover:text-cyan-100" />
+              </a>
+            ))}
+          </div>
 
-          <InfoCard title="Layout idea" icon={Sparkles}>
-            Use this as a stylish link hub with icon buttons, status tags, short
-            descriptions, and highlighted destinations.
-          </InfoCard>
-
-          <InfoCard title="Extra touch" icon={Code2}>
-            You can make this store feel like an internet café or terminal
-            station with clickable neon chips.
-          </InfoCard>
-
-          <InfoCard title="Good CTA" icon={ExternalLink}>
-            Open external profiles in new tabs and keep the city experience
-            intact in the background.
+          <InfoCard title="Link cafe mode" icon={Globe}>
+            This stop keeps the public presence compact: source code, work
+            history, live apps, writing, teaching material, and important
+            destinations stay one tap away.
           </InfoCard>
         </div>
       );
 
     case "contact":
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          <InfoCard title="Direct contact" icon={Mail}>
-            Email, contact form, business inquiries, collaborations, and project
-            invitations should live here.
-          </InfoCard>
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <InfoCard title="Direct line" icon={Mail}>
+              For freelance work, product ideas, teaching, collaborations, or
+              technical help, send an email or WhatsApp message with a short
+              description of what you want to build.
+            </InfoCard>
 
-          <InfoCard title="Keep it simple" icon={Sparkles}>
-            On mobile, fast contact wins. Use a compact form or direct actions
-            like email and social profile shortcuts.
-          </InfoCard>
+            <InfoCard title="Best fit" icon={Sparkles}>
+              Interactive sites, React interfaces, full-stack prototypes,
+              portfolio systems, internal tools, and polished learning
+              experiences.
+            </InfoCard>
 
-          <InfoCard title="Good fields" icon={Code2}>
-            Name, email, project type, short message, and maybe budget or
-            timeline when you want qualified leads.
-          </InfoCard>
+            <InfoCard title="WhatsApp" icon={MessageCircle}>
+              +55 (35) 9 9202-5205 for direct project conversations and quick
+              follow-up messages.
+            </InfoCard>
 
-          <InfoCard title="Good CTA" icon={ExternalLink}>
-            Send message, schedule a call, or jump to a preferred channel where
-            you respond faster.
-          </InfoCard>
+            <InfoCard title="Phone" icon={Phone}>
+              +55 (35) 9 9202-5205 is also available as a standard phone
+              contact.
+            </InfoCard>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+            <p className="text-xs uppercase tracking-[0.25em] text-cyan-300/80">
+              Message checklist
+            </p>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-300">
+              <li>Project goal and rough deadline.</li>
+              <li>Current state: idea, prototype, redesign, or production.</li>
+              <li>Useful links, references, or technical constraints.</li>
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <ActionLink href={contactLinks.email} external={false}>
+              Email
+            </ActionLink>
+            <ActionLink href={contactLinks.whatsapp}>
+              WhatsApp
+            </ActionLink>
+            <ActionLink href={contactLinks.phone} external={false}>
+              Call
+            </ActionLink>
+            <ActionLink href={contactLinks.linkedin}>
+              LinkedIn
+            </ActionLink>
+          </div>
         </div>
       );
 

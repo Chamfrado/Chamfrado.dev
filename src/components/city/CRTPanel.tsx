@@ -1,12 +1,85 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import type { SectionItem } from "../../types/section";
+import type { SectionId, SectionItem } from "../../types/section";
 import SectionContent from "./SectionContent";
 
 type CRTPanelProps = {
   open: boolean;
   section: SectionItem | null;
   onClose: () => void;
+};
+
+const sidePanels: Record<SectionId, { title: string; body: string }[]> = {
+  career: [
+    {
+      title: "Core stack",
+      body: "React, TypeScript, Tailwind CSS, Java, Spring Boot, REST APIs, and SQL.",
+    },
+    {
+      title: "Delivery angle",
+      body: "Practical product work with clean UI behavior, clear component structure, and decisions visitors can inspect.",
+    },
+    {
+      title: "Best fit",
+      body: "Interactive sites, dashboards, internal tools, prototypes, and learning-focused products.",
+    },
+  ],
+  bio: [
+    {
+      title: "Portfolio idea",
+      body: "Chamfrado.dev presents the work as a place to explore instead of a static document.",
+    },
+    {
+      title: "Visual language",
+      body: "Neon city streets, CRT screens, game UI rhythms, and readable interaction patterns.",
+    },
+    {
+      title: "Operating mode",
+      body: "Build fast, keep the structure understandable, and make the interface carry the story.",
+    },
+  ],
+  projects: [
+    {
+      title: "Featured builds",
+      body: "Chamfrado.dev, PlantaHUB, and Shelfy show portfolio UI work, full-stack delivery, and desktop app development.",
+    },
+    {
+      title: "Project proof",
+      body: "Each card includes real status, stack, repository access, and live or download links when available.",
+    },
+    {
+      title: "Project lens",
+      body: "The section favors concrete outcomes over speculative entries, so visitors can inspect actual work.",
+    },
+  ],
+  links: [
+    {
+      title: "Primary routes",
+      body: "GitHub for source code, LinkedIn for professional context, and chamfrado.dev as the main base.",
+    },
+    {
+      title: "Visitor goal",
+      body: "Keep important destinations close without pulling people away from the city experience too early.",
+    },
+    {
+      title: "Expansion",
+      body: "Live apps, writing, videos, talks, and teaching resources can be added as the portfolio grows.",
+    },
+  ],
+  contact: [
+    {
+      title: "Fastest channel",
+      body: "Email at prog.lohran@gmail.com works best when the message includes the goal, rough deadline, and current state.",
+    },
+    {
+      title: "WhatsApp",
+      body: "+55 (35) 9 9202-5205 is available for direct project conversations and quick follow-up.",
+    },
+    {
+      title: "Good requests",
+      body: "Freelance builds, product prototypes, React UI work, backend help, and technical learning material.",
+    },
+  ],
 };
 
 export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
@@ -88,20 +161,19 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
                 </div>
 
                 <div className="mt-4 space-y-3">
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm text-zinc-200">
-                    Use this right column for quick links, badges, mini stats,
-                    or featured actions.
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm text-zinc-200">
-                    On mobile this panel stacks under the main content, so it
-                    still feels like part of the TV UI.
-                  </div>
-
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm text-zinc-200">
-                    Later, each section can have its own custom right-side
-                    widgets instead of generic blocks.
-                  </div>
+                  {sidePanels[section.id].map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-white/10 bg-black/25 p-4 text-sm text-zinc-200"
+                    >
+                      <p className="text-[10px] uppercase tracking-[0.25em] text-cyan-300/80">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 leading-6 text-zinc-300">
+                        {item.body}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -157,11 +157,11 @@ export default function CityView() {
               chamfrado.dev
             </p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-              Purple Night Drive
+              Chamfrado.dev
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-300 md:text-base">
-              A mobile-first portfolio inspired by neon cities, retro games, and
-              old TV screens.
+              A neon city portfolio for software development, interactive web
+              work, and practical product experiments.
             </p>
           </header>
 

@@ -5,37 +5,37 @@ export const sections: SectionItem[] = [
   {
     id: 'career',
     storeName: 'TECH LAB',
-    title: 'Professional Career',
-    subtitle: 'Experience, skills, and shipped products.',
+    title: 'Career',
+    subtitle: 'Product-minded frontend and full-stack engineering.',
     description:
-      'A section to show your journey, technologies, case studies, and professional direction.',
+      'I build React interfaces, TypeScript systems, and Java/Spring APIs with a focus on polished flows and maintainable delivery.',
     icon: Briefcase,
   },
   {
     id: 'bio',
     storeName: 'NIGHT ROOM',
-    title: 'Bio',
-    subtitle: 'Your story, style, and creative identity.',
+    title: 'About Chamfrado',
+    subtitle: 'A practical builder with a taste for expressive interfaces.',
     description:
-      'A personal section to introduce who you are, what drives you, and how you think.',
+      'Chamfrado.dev turns a portfolio into a small world: direct, technical, visual, and built to feel memorable without hiding the work.',
     icon: UserRound,
   },
   {
     id: 'projects',
     storeName: 'PIXEL ARCADE',
     title: 'Projects',
-    subtitle: 'Featured builds, experiments, and interactive work.',
+    subtitle: 'Selected builds, experiments, and interactive systems.',
     description:
-      'A showcase of selected work with visuals, summaries, and direct links.',
+      'A focused showcase for web products, backend labs, teaching material, and experiments that explain the decisions behind the code.',
     icon: Gamepad2,
   },
   {
     id: 'links',
     storeName: 'LINK CAFE',
     title: 'Websites & Socials',
-    subtitle: 'Your platforms, communities, and online presence.',
+    subtitle: 'Profiles, repositories, and public channels.',
     description:
-      'A clean hub for GitHub, LinkedIn, social media, and anything worth visiting.',
+      'A compact hub for GitHub, LinkedIn, the main site, and the places where Chamfrado shares work online.',
     icon: Globe,
   },
   {
@@ -44,7 +44,7 @@ export const sections: SectionItem[] = [
     title: 'Contact',
     subtitle: 'A direct way to start a conversation.',
     description:
-      'A focused section for email, forms, work inquiries, and collaborations.',
+      'This stop is for project ideas, freelance work, product prototypes, technical help, and collaboration requests.',
     icon: Mail,
   },
 ];
