@@ -9,7 +9,7 @@ export default function Motorcycle({ activeIndex }: MotorcycleProps) {
     <motion.div
       animate={{ rotate: activeIndex % 2 === 0 ? -2 : 2 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className="pointer-events-none absolute bottom-0 left-1/2 z-20 -translate-x-1/2"
+      className="pointer-events-none absolute bottom-[calc(6.75rem+env(safe-area-inset-bottom))] left-1/2 z-[5] -translate-x-1/2 md:bottom-16"
     >
       <div className="relative">
         <motion.div

@@ -14,7 +14,7 @@ export default function Building({
 }: BuildingProps) {
   return (
     <motion.div
-      className="group relative flex h-[400px] items-end justify-center md:h-[500px]"
+      className="group relative flex h-[42vh] max-h-[300px] items-end justify-center min-[390px]:h-[45vh] min-[390px]:max-h-[330px] md:h-[56vh] md:max-h-[500px]"
       animate={{
         y: isActive ? -8 : 8,
         scale: isActive ? 1 : 0.78,
@@ -40,7 +40,7 @@ export default function Building({
       <motion.img
         src={`/buildings/${section.id}.png`}
         alt={section.title}
-        className="relative z-10 max-h-[300px] w-auto select-none object-contain transition duration-300 group-hover:brightness-110 md:max-h-[360px]"
+        className="relative z-10 max-h-[34vh] w-auto select-none object-contain transition duration-300 group-hover:brightness-110 min-[390px]:max-h-[36vh] md:max-h-[42vh]"
         animate={{
           y: isActive ? [0, -3, 0] : 0,
           filter: isActive

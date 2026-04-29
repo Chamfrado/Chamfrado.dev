@@ -47,7 +47,7 @@ function Stars() {
 
 function RoadLights() {
   return (
-    <div className="pointer-events-none absolute bottom-20 left-0 right-0 z-10 overflow-hidden">
+    <div className="pointer-events-none absolute bottom-[calc(8rem+env(safe-area-inset-bottom))] left-0 right-0 z-10 overflow-hidden md:bottom-20">
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <motion.div
           key={index}
@@ -151,7 +151,7 @@ export default function CityView() {
         <div className="absolute bottom-24 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400 to-transparent animate-pulse" />
         <div className="absolute inset-x-0 bottom-28 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-400/40 to-transparent" />
 
-        <div className="relative mx-auto flex h-screen max-w-7xl flex-col justify-between px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-4 md:px-8 md:py-4">
+        <div className="relative mx-auto flex h-screen min-h-0 max-w-7xl flex-col justify-between px-4 pb-[calc(8rem+env(safe-area-inset-bottom))] pt-4 md:px-8 md:py-4">
           <header className="pt-2">
             <p className="text-[10px] uppercase tracking-[0.45em] text-fuchsia-300/75">
               chamfrado.dev
@@ -159,13 +159,13 @@ export default function CityView() {
             <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
               Chamfrado.dev
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-300 md:text-base">
+            <p className="mt-3 max-w-[22rem] text-sm leading-6 text-zinc-300 md:max-w-2xl md:text-base">
               A neon city portfolio for software development, interactive web
               work, and practical product experiments.
             </p>
           </header>
 
-          <section className="relative flex-1 py-4 md:py-6">
+          <section className="relative min-h-0 flex-1 py-4 md:py-6">
             <Skyline offset={skylineOffset} />
 
             <div className="relative z-10 mt-2 overflow-x-hidden overflow-y-visible md:mt-4">
@@ -203,8 +203,6 @@ export default function CityView() {
               </motion.div>
             </div>
 
-            <RoadLights />
-            <Motorcycle activeIndex={activeIndex} />
           </section>
 
           <StreetHUD
@@ -215,6 +213,9 @@ export default function CityView() {
             onNext={goNext}
           />
         </div>
+
+        <RoadLights />
+        <Motorcycle activeIndex={activeIndex} />
 
         <MobileCityControls
           activeSection={activeSection}
