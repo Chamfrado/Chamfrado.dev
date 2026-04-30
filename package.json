@@ -11,7 +11,8 @@
     "build": "tsc -b && vite build",
     "deploy:pages": "npx wrangler pages deploy dist --project-name=chamfrado-dev",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
