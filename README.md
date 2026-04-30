@@ -51,12 +51,12 @@ Recommended Pages settings:
 - Framework preset: `Vite`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Deploy command: `npm run deploy:pages`
+- Deploy command: leave empty, or use `echo "skip"` if the dashboard requires a value
 - Node version: `22.14.0` or any version matching `^20.19.0 || >=22.12.0`
 
 This repo also includes `wrangler.toml` with the Pages output directory and `public/_redirects` for single-page app fallback routing.
 
-Do not set the deploy command to `npx wrangler deploy`. That command targets Workers and will fail for this Pages project. If you run the command directly, use `npx wrangler pages deploy dist --project-name=chamfrado-dev` after `npm run build`. The `--project-name` flag must stay hyphenated.
+Do not set the deploy command to `npx wrangler deploy`. That command targets Workers and will fail for this Pages project. Git-connected Cloudflare Pages deploys the `dist` directory automatically after the build finishes. If you run the command directly outside the dashboard, use `npm run deploy:pages` after `npm run build`.
 
 ## Featured Projects
 
