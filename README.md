@@ -42,21 +42,18 @@ npm run lint
 - `src/components/city`: city scene, buildings, controls, HUD, and CRT panel UI.
 - `src/data/sections.ts`: portfolio district metadata.
 - `public/assets`: runtime sprites, intro media, skyline, road, and building artwork.
-- `public/_redirects`: Cloudflare Pages SPA fallback so browser refreshes resolve to `index.html`.
+- `vercel.json`: Vercel build settings and SPA fallback rewrites.
 
-## Cloudflare Pages Deployment
+## Vercel Deployment
 
-Recommended Pages settings:
+Recommended Vercel settings:
 
 - Framework preset: `Vite`
 - Build command: `npm run build`
-- Build output directory: `dist`
-- Deploy command: leave empty, or use `echo "skip"` if the dashboard requires a value
-- Node version: `22.14.0` or any version matching `^20.19.0 || >=22.12.0`
+- Output directory: `dist`
+- Install command: `npm install`
 
-This repo also includes `wrangler.toml` with the Pages output directory and `public/_redirects` for single-page app fallback routing.
-
-Do not set the deploy command to `npx wrangler deploy`. That command targets Workers and will fail for this Pages project. Git-connected Cloudflare Pages deploys the `dist` directory automatically after the build finishes. If you run the command directly outside the dashboard, use `npm run deploy:pages` after `npm run build`.
+This repo includes `vercel.json`, so Vercel can read the Vite build command, `dist` output directory, and the single-page app fallback rewrite automatically.
 
 ## Featured Projects
 
