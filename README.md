@@ -41,7 +41,19 @@ npm run lint
 
 - `src/components/city`: city scene, buildings, controls, HUD, and CRT panel UI.
 - `src/data/sections.ts`: portfolio district metadata.
-- `public/buildings`: building artwork used by each district.
+- `public/assets`: runtime sprites, intro media, skyline, road, and building artwork.
+- `public/_redirects`: Cloudflare Pages SPA fallback so browser refreshes resolve to `index.html`.
+
+## Cloudflare Pages Deployment
+
+Recommended Pages settings:
+
+- Framework preset: `Vite`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node version: `22.14.0` or any version matching `^20.19.0 || >=22.12.0`
+
+This repo also includes `wrangler.toml` with the Pages output directory and `public/_redirects` for single-page app fallback routing.
 
 ## Featured Projects
 
