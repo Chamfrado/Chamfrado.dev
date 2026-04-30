@@ -34,6 +34,16 @@ type ProjectItem = {
   links: ProjectLink[];
 };
 
+type CareerItem = {
+  title: string;
+  company: string;
+  engagement: string;
+  period: string;
+  location: string;
+  highlights: string[];
+  skills: string[];
+};
+
 const contactLinks = {
   email: "mailto:prog.lohran@gmail.com",
   github: "https://github.com/Chamfrado",
@@ -105,6 +115,46 @@ const projects: ProjectItem[] = [
         href: "https://github.com/Chamfrado/Shelfy",
       },
     ],
+  },
+];
+
+const careerItems: CareerItem[] = [
+  {
+    title: "Programming Teacher",
+    company: "Government of the State of Minas Gerais",
+    engagement: "Full-time",
+    period: "Mar 2024 - Present",
+    location: "Santa Rita do Sapucai, Minas Gerais, Brazil - On-site",
+    highlights: [
+      "Teach Programming Logic, Computational Thinking, Basic Computer Science, Java, Python, HTML/CSS, Databases, AI, and React.js.",
+      "Prepare students to understand programming fundamentals through practical exercises and accessible technical explanations.",
+    ],
+    skills: ["Teaching", "Java", "Python", "HTML/CSS", "Databases", "AI", "React.js"],
+  },
+  {
+    title: "Educational Content Developer and Researcher",
+    company: "Exxer",
+    engagement: "Freelance",
+    period: "Aug 2024 - Sep 2025",
+    location: "Santa Rita do Sapucai, Minas Gerais, Brazil - Remote",
+    highlights: [
+      "Researched and developed educational content on Robotics and Artificial Intelligence for high school students.",
+      "Coached the programming team and prepared students for the Iron Cup competition.",
+      "Collaborated with educators to design engaging and accessible learning materials.",
+    ],
+    skills: ["Research", "Educational technology", "Robotics", "Artificial Intelligence", "Coaching"],
+  },
+  {
+    title: "Systems Development Analyst",
+    company: "Advance Technology Industria e Comercio LTDA",
+    engagement: "Full-time",
+    period: "Aug 2021 - Aug 2024",
+    location: "Santa Rita do Sapucai, Minas Gerais, Brazil - On-site",
+    highlights: [
+      "Built full-stack applications for different internal needs across the company.",
+      "Delivered web applications and interface work with a practical focus on business workflows.",
+    ],
+    skills: ["Full-stack development", "Web applications", "CSS", "Frontend", "Backend"],
   },
 ];
 
@@ -220,6 +270,42 @@ function ProjectCard({
   );
 }
 
+function CareerCard({
+  title,
+  company,
+  engagement,
+  period,
+  location,
+  highlights,
+  skills,
+}: CareerItem) {
+  return (
+    <article className="rounded-2xl border border-white/10 bg-black/25 p-4">
+      <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+        <div>
+          <h4 className="text-sm font-semibold text-white">{title}</h4>
+          <p className="mt-1 text-xs text-zinc-400">
+            {company} - {engagement}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-cyan-200">
+          {period}
+        </span>
+      </div>
+
+      <p className="mt-3 text-xs text-fuchsia-200/80">{location}</p>
+
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-300">
+        {highlights.map((highlight) => (
+          <li key={highlight}>{highlight}</li>
+        ))}
+      </ul>
+
+      <TagList items={skills} />
+    </article>
+  );
+}
+
 export default function SectionContent({ section }: { section: SectionItem }) {
   switch (section.id) {
     case "career":
@@ -252,6 +338,17 @@ export default function SectionContent({ section }: { section: SectionItem }) {
             ))}
           </div>
 
+          <div className="space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">
+              Recent work
+            </p>
+            <div className="grid gap-3">
+              {careerItems.map((item) => (
+                <CareerCard key={`${item.company}-${item.title}`} {...item} />
+              ))}
+            </div>
+          </div>
+
           <div className="flex flex-wrap gap-3">
             <ActionLink href={contactLinks.email} external={false}>
               Start a project
@@ -265,30 +362,77 @@ export default function SectionContent({ section }: { section: SectionItem }) {
 
     case "bio":
       return (
-        <div className="grid gap-4 md:grid-cols-2">
-          <InfoCard title="Identity" icon={UserRound}>
-            Chamfrado.dev is built around the idea that a portfolio can be a
-            place, not just a document. The style mixes web craft, game
-            interfaces, neon cities, and practical engineering into one
-            navigable experience.
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <InfoCard title="Who I am" icon={UserRound}>
+              I am Lohran Cintra, also known as Chamfrado: a mid-level software
+              developer, engineer, and programming teacher from Santa Rita do
+              Sapucai, Minas Gerais. I am available for local, remote, and
+              international work.
+            </InfoCard>
+
+            <InfoCard title="Builder profile" icon={Code2}>
+              I am a software developer who genuinely loves the craft. I do not
+              lock myself to one favorite stack; I enjoy learning new tools,
+              facing different problems, and turning difficult requirements into
+              working systems.
+            </InfoCard>
+
+            <InfoCard title="Origin story" icon={Sparkles}>
+              I grew up alongside the evolution of technology and watched it
+              transform the world around me. My first real contact with
+              programming came from making GTA San Andreas mods, and after that
+              I never stopped building.
+            </InfoCard>
+
+            <InfoCard title="How I work" icon={MessageSquare}>
+              My style is practical, versatile, and challenge-driven. I like
+              solving large problems, learning while I build, and keeping the
+              final result useful for the people who will actually use it.
+            </InfoCard>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                Strongest skills
+              </p>
+              <TagList items={["React", "Java", "Teaching", "Full-stack systems"]} />
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                Work I want
+              </p>
+              <TagList items={["Freelance sites", "Internal tools", "Product prototypes", "Startups"]} />
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                Languages
+              </p>
+              <TagList items={["Portuguese - Native", "English - Advanced", "International work"]} />
+            </div>
+          </div>
+
+          <InfoCard title="Proof points" icon={Briefcase}>
+            I have worked as a developer since 2018, starting with small
+            inventory control systems, BI tools, and company websites. Later I
+            moved into firmware edits for ONU/ONT devices, streaming websites,
+            full ERP applications, and internal solutions around OMIE workflows.
+            I also became a teacher and educational content developer, writing
+            three years of high school material for Robotics and Artificial
+            Intelligence.
           </InfoCard>
 
-          <InfoCard title="Working style" icon={Code2}>
-            I like systems that are expressive on the surface and simple under
-            the hood: clear components, strong interaction rules, and visuals
-            that help people understand where they are.
-          </InfoCard>
-
-          <InfoCard title="Creative tone" icon={Sparkles}>
-            The mood is retro-futurist and hands-on: old screens, night streets,
-            arcade pacing, readable UI, and small details that make a site feel
-            alive without getting in the way.
-          </InfoCard>
-
-          <InfoCard title="What matters" icon={MessageSquare}>
-            Useful software, honest presentation, fast learning loops, and
-            turning technical ideas into experiences people can actually use.
-          </InfoCard>
+          <div className="flex flex-wrap gap-3">
+            <ActionLink href={contactLinks.email} external={false}>
+              Work with me
+            </ActionLink>
+            <ActionLink href={contactLinks.linkedin}>
+              LinkedIn
+            </ActionLink>
+          </div>
         </div>
       );
 

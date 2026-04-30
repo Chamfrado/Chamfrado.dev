@@ -15,9 +15,9 @@ export const sections: SectionItem[] = [
     id: 'bio',
     storeName: 'NIGHT ROOM',
     title: 'About Chamfrado',
-    subtitle: 'A practical builder with a taste for expressive interfaces.',
+    subtitle: 'Lohran Cintra: developer, engineer, teacher, and lifelong learner.',
     description:
-      'Chamfrado.dev turns a portfolio into a small world: direct, technical, visual, and built to feel memorable without hiding the work.',
+      'I build software with curiosity, versatility, and a practical mindset shaped by games, teaching, full-stack systems, and real business problems.',
     icon: UserRound,
   },
   {

@@ -31,16 +31,16 @@ const sidePanels: Record<SectionId, { title: string; body: string }[]> = {
   ],
   bio: [
     {
-      title: "Portfolio idea",
-      body: "Chamfrado.dev presents the work as a place to explore instead of a static document.",
+      title: "Real name",
+      body: "Lohran Cintra, also known as Chamfrado: developer, engineer, teacher, and practical problem solver.",
     },
     {
-      title: "Visual language",
-      body: "Neon city streets, CRT screens, game UI rhythms, and readable interaction patterns.",
+      title: "Main strengths",
+      body: "React, Java, teaching, full-stack systems, and the ability to learn fast when the challenge demands it.",
     },
     {
-      title: "Operating mode",
-      body: "Build fast, keep the structure understandable, and make the interface carry the story.",
+      title: "Availability",
+      body: "Based in Santa Rita do Sapucai, Brazil, with Portuguese as a native language, advanced English, and availability for international work.",
     },
   ],
   projects: [
@@ -234,7 +234,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
               <div className="relative flex shrink-0 items-center justify-between gap-4 border-b border-fuchsia-400/20 bg-zinc-900/80 px-4 py-3 md:px-6 md:py-4">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.35em] text-fuchsia-300/75">
-                    Old TV Output
+                    {section.title} Broadcast
                   </p>
                   <h2 className="mt-1 text-xl font-semibold text-white md:text-3xl">
                     {section.title}
