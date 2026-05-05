@@ -1,19 +1,22 @@
-import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { sections } from "../../data/sections";
 import Building from "./Building";
 import CRTPanel from "./CRTPanel";
 import MobileCityControls from "./MobileCityControls";
-import Motorcycle from "./Motorcycle";
+import Motorcycle, {
+  type MotorcycleFacing,
+  type MotorcyclePhase,
+} from "./Motorcycle";
 import StreetHUD from "./StreetHUD";
 
 const CARD_WIDTH_MOBILE = 300;
 const CARD_WIDTH_DESKTOP = 360;
-const CARD_GAP = 160;
+const CARD_GAP = 420;
 const CITY_ROW_TRANSITION = {
-  type: "spring",
-  stiffness: 70,
-  damping: 24,
+  type: "tween",
+  duration: 1.35,
+  ease: "easeInOut",
 } as const;
 
 const VISUAL_OFFSET: Record<string, number> = {
@@ -52,7 +55,7 @@ function Stars() {
 
 function RoadLights() {
   return (
-    <div className="pointer-events-none absolute bottom-[calc(16vh+env(safe-area-inset-bottom))] left-0 right-0 z-[8] overflow-hidden opacity-80 md:bottom-[15vh]">
+    <div className="pointer-events-none absolute bottom-[calc(8.5vh+env(safe-area-inset-bottom))] left-0 right-0 z-[8] overflow-hidden opacity-80 md:bottom-[6.8vh]">
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <motion.div
           key={index}
@@ -119,7 +122,7 @@ function SpriteBackdrop({
 }) {
   return (
     <>
-      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[29vh] z-[1] overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-[1] overflow-hidden md:bottom-[16vh]">
         <RepeatedSpriteLayer
           src="/assets/skyline/skyline.png"
           offset={skylineOffset}
@@ -142,7 +145,7 @@ function SpriteBackdrop({
       <motion.img
         src="/assets/road/road-base.png"
         alt=""
-        className="pointer-events-none absolute bottom-0 left-0 z-[3] h-[31vh] min-h-[210px] w-[190%] max-w-none object-fill object-center opacity-100 brightness-[0.9] saturate-[1.02]"
+        className="pointer-events-none absolute bottom-0 left-0 z-[3] h-[18vh] min-h-[118px] w-[230%] max-w-none object-fill object-center opacity-100 brightness-[0.9] saturate-[1.02] md:h-[16vh] md:min-h-[120px]"
         animate={{ x: -roadOffset }}
         transition={CITY_ROW_TRANSITION}
         aria-hidden="true"
@@ -157,23 +160,39 @@ function SceneGrade() {
       <div className="pointer-events-none absolute inset-0 z-[4] bg-[radial-gradient(circle_at_32%_24%,rgba(168,85,247,0.1),transparent_34%),radial-gradient(circle_at_72%_18%,rgba(34,211,238,0.08),transparent_32%),linear-gradient(to_bottom,rgba(4,2,9,0)_0%,rgba(4,2,9,0.04)_62%,rgba(3,1,7,0.24)_100%)]" />
       <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_center,transparent_58%,rgba(3,1,8,0.22)_86%,rgba(0,0,0,0.62)_100%)]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-[52vh] z-[6] h-28 bg-gradient-to-b from-transparent via-[#2a1654]/16 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[28.8vh] z-[7] h-px bg-gradient-to-r from-transparent via-fuchsia-300/22 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-[17.8vh] z-[7] h-px bg-gradient-to-r from-transparent via-fuchsia-300/22 to-transparent md:bottom-[15.8vh]" />
     </>
   );
 }
 
 export default function CityView() {
+  const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardWidth, setCardWidth] = useState(getCardWidth());
+  const [motorcyclePhase, setMotorcyclePhase] =
+    useState<MotorcyclePhase>("idle");
+  const [motorcycleFacing, setMotorcycleFacing] =
+    useState<MotorcycleFacing>("right");
+  const [motorcycleSequenceId, setMotorcycleSequenceId] = useState(0);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(
     null,
   );
+  const phaseTimeoutsRef = useRef<number[]>([]);
+
+  const clearPhaseTimeouts = useCallback(() => {
+    phaseTimeoutsRef.current.forEach((timeoutId) =>
+      window.clearTimeout(timeoutId),
+    );
+    phaseTimeoutsRef.current = [];
+  }, []);
 
   useEffect(() => {
     const onResize = () => setCardWidth(getCardWidth());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  useEffect(() => clearPhaseTimeouts, [clearPhaseTimeouts]);
 
   const activeSection = useMemo(() => sections[activeIndex], [activeIndex]);
 
@@ -188,17 +207,68 @@ export default function CityView() {
   const skyOffset = trackOffset * 0.03;
   const skylineOffset = trackOffset * 0.03;
   const cityRowOffset = trackOffset;
-  const roadOffset = trackOffset * 0.12;
+  const roadOffset = trackOffset * 0.28;
 
-  const goPrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? 0 : prev - 1));
-  };
+  const travelTo = useCallback(
+    (nextIndex: number) => {
+      const boundedIndex = Math.min(
+        Math.max(nextIndex, 0),
+        sections.length - 1,
+      );
 
-  const goNext = () => {
-    setActiveIndex((prev) =>
-      prev === sections.length - 1 ? sections.length - 1 : prev + 1,
-    );
-  };
+      if (boundedIndex === activeIndex) return;
+
+      const nextFacing: MotorcycleFacing =
+        boundedIndex > activeIndex ? "right" : "left";
+      const isChangingDirection = nextFacing !== motorcycleFacing;
+
+      clearPhaseTimeouts();
+      setMotorcycleSequenceId((currentSequence) => currentSequence + 1);
+
+      if (shouldReduceMotion) {
+        setMotorcycleFacing(nextFacing);
+        setMotorcyclePhase("idle");
+        setActiveIndex(boundedIndex);
+        return;
+      }
+
+      if (isChangingDirection) {
+        setMotorcyclePhase("turn");
+
+        phaseTimeoutsRef.current = [
+          window.setTimeout(() => {
+            setMotorcycleFacing(nextFacing);
+            setMotorcyclePhase("accelerate");
+            setActiveIndex(boundedIndex);
+          }, 540),
+          window.setTimeout(() => setMotorcyclePhase("ride"), 980),
+          window.setTimeout(() => setMotorcyclePhase("brake"), 1600),
+          window.setTimeout(() => setMotorcyclePhase("idle"), 1940),
+        ];
+
+        return;
+      }
+
+      setMotorcyclePhase("accelerate");
+      setActiveIndex(boundedIndex);
+
+      phaseTimeoutsRef.current = [
+        window.setTimeout(() => setMotorcyclePhase("ride"), 420),
+        window.setTimeout(() => setMotorcyclePhase("brake"), 1420),
+        window.setTimeout(() => setMotorcyclePhase("idle"), 1740),
+      ];
+    },
+    [
+      activeIndex,
+      clearPhaseTimeouts,
+      motorcycleFacing,
+      shouldReduceMotion,
+    ],
+  );
+
+  const goPrev = () => travelTo(activeIndex - 1);
+
+  const goNext = () => travelTo(activeIndex + 1);
 
   return (
     <main className="fixed inset-0 h-dvh overflow-hidden bg-[#07030E] text-white">
@@ -234,7 +304,7 @@ export default function CityView() {
           </header>
         </div>
 
-        <section className="pointer-events-none absolute inset-x-0 top-0 bottom-[29vh] z-[9] overflow-hidden">
+        <section className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-[9] overflow-hidden md:bottom-[16vh]">
           <div className="pointer-events-auto absolute inset-x-0 bottom-0 h-[25vh] min-h-[165px] overflow-visible">
             <div className="relative h-full overflow-visible">
               <motion.div
@@ -247,8 +317,8 @@ export default function CityView() {
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.04}
                 onDragEnd={(_, info) => {
-                  if (info.offset.x < -50) goNext();
-                  if (info.offset.x > 50) goPrev();
+                  if (info.offset.x < -50) travelTo(activeIndex + 1);
+                  if (info.offset.x > 50) travelTo(activeIndex - 1);
                 }}
                 style={{ gap: `${CARD_GAP}px` }}
               >
@@ -284,7 +354,12 @@ export default function CityView() {
         </div>
 
         <RoadLights />
-        <Motorcycle activeIndex={activeIndex} />
+        <Motorcycle
+          activeIndex={activeIndex}
+          facing={motorcycleFacing}
+          phase={motorcyclePhase}
+          sequenceId={motorcycleSequenceId}
+        />
 
         <MobileCityControls
           activeSection={activeSection}
