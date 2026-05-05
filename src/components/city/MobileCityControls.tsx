@@ -19,23 +19,19 @@ export default function MobileCityControls({
   onEnter,
 }: MobileCityControlsProps) {
   return (
-    <div className="fixed bottom-0 left-0 z-40 w-[100dvw] px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
-      <div className="relative h-[5.5rem] w-full rounded-[1.5rem] border border-fuchsia-400/25 bg-black/70 p-2 shadow-[0_0_28px_rgba(168,85,247,0.25)] backdrop-blur-xl">
+    <div className="fixed bottom-0 left-3 z-40 box-border w-[calc(100vw-1.5rem)] max-w-[360px] overflow-hidden pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 md:hidden">
+      <div className="grid h-[5.5rem] w-full grid-cols-[2.5rem_minmax(0,1fr)_2.5rem] items-center gap-2 rounded-[1.5rem] border border-fuchsia-400/25 bg-black/70 p-2 shadow-[0_0_28px_rgba(168,85,247,0.25)] backdrop-blur-xl">
         <button
           type="button"
           onClick={onPrev}
           disabled={activeIndex === 0}
-          className="absolute flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
-          style={{ left: "0.5rem", top: "50%" }}
+          className="flex h-10 w-10 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
           aria-label="Previous stop"
         >
           <ArrowLeft className="h-5 w-5" />
         </button>
 
-        <div
-          className="absolute min-w-0 text-center"
-          style={{ left: "3.5rem", right: "3.5rem", top: "0.5rem" }}
-        >
+        <div className="min-w-0 text-center">
           <div className="flex min-w-0 items-center justify-center gap-2">
             <p className="truncate text-[10px] uppercase tracking-[0.24em] text-cyan-300/80">
               {activeSection.title}
@@ -59,8 +55,7 @@ export default function MobileCityControls({
           type="button"
           onClick={onNext}
           disabled={activeIndex === total - 1}
-          className="absolute flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
-          style={{ right: "0.5rem", top: "50%" }}
+          className="flex h-10 w-10 items-center justify-center rounded-2xl border border-fuchsia-400/20 bg-white/5 text-white transition hover:border-fuchsia-300/40 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
           aria-label="Next stop"
         >
           <ArrowRight className="h-5 w-5" />

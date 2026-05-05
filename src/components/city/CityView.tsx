@@ -128,7 +128,7 @@ function SpriteBackdrop({
           offset={skylineOffset}
           copies={3}
           className="z-[1] h-[70vh] min-h-[390px]"
-          imageClassName="h-full w-[160vw] max-w-none shrink-0 object-fill object-bottom opacity-90 brightness-[0.86] saturate-[0.98]"
+          imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-90 brightness-[0.86] saturate-[0.98]"
         />
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[38vh] bg-[radial-gradient(ellipse_at_48%_55%,rgba(168,85,247,0.2),transparent_56%),radial-gradient(ellipse_at_68%_58%,rgba(34,211,238,0.1),transparent_50%),linear-gradient(to_bottom,transparent_0%,rgba(38,20,74,0.32)_34%,rgba(10,6,24,0.24)_78%,transparent_100%)]" />
@@ -138,17 +138,16 @@ function SpriteBackdrop({
           offset={cityRowOffset}
           copies={5}
           className="z-[3] h-[24vh] min-h-[150px]"
-          imageClassName="h-full w-[160vw] max-w-none shrink-0 object-fill object-bottom opacity-100 brightness-[0.95] saturate-[1.04]"
+          imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-100 brightness-[0.95] saturate-[1.04]"
         />
       </div>
 
-      <motion.img
+      <RepeatedSpriteLayer
         src="/assets/road/road-base.png"
-        alt=""
-        className="pointer-events-none absolute bottom-0 left-0 z-[3] h-[18vh] min-h-[118px] w-[230%] max-w-none object-fill object-center opacity-100 brightness-[0.9] saturate-[1.02] md:h-[16vh] md:min-h-[120px]"
-        animate={{ x: -roadOffset }}
-        transition={CITY_ROW_TRANSITION}
-        aria-hidden="true"
+        offset={roadOffset}
+        copies={4}
+        className="z-[3] h-[18vh] min-h-[118px] md:h-[16vh] md:min-h-[120px]"
+        imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-100 brightness-[0.9] saturate-[1.02]"
       />
     </>
   );

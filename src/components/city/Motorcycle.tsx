@@ -41,7 +41,7 @@ const ACTIONS: Record<
 };
 
 type MotorcycleAction = (typeof ACTIONS)[MotorcyclePhase];
-const MOTORCYCLE_ASSET_VERSION = "clean-v3";
+const MOTORCYCLE_ASSET_VERSION = "clean-v4";
 
 function getFrameSource(action: MotorcycleAction, frameIndex: number) {
   return `${action.directory}/${frameIndex}.png?v=${MOTORCYCLE_ASSET_VERSION}`;
@@ -75,17 +75,46 @@ function SpriteFrame({
   }, []);
 
   useEffect(() => {
-    if (shouldReduceMotion) return undefined;
+    setFrameIndex(0);
+  }, [action.directory]);
 
-    const interval = window.setInterval(() => {
-      setFrameIndex((currentFrame) => {
-        if (action.loop) return (currentFrame + 1) % action.frames;
-        return Math.min(currentFrame + 1, action.frames - 1);
-      });
-    }, 1000 / action.fps);
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setFrameIndex(0);
+      return undefined;
+    }
 
-    return () => window.clearInterval(interval);
-  }, [action.fps, action.frames, action.loop, shouldReduceMotion]);
+    const frameDuration = 1000 / action.fps;
+    let animationFrameId = 0;
+    let startTime: number | null = null;
+
+    const tick = (timestamp: number) => {
+      startTime ??= timestamp;
+
+      const elapsed = timestamp - startTime;
+      const nextFrame = action.loop
+        ? Math.floor(elapsed / frameDuration) % action.frames
+        : Math.min(Math.floor(elapsed / frameDuration), action.frames - 1);
+
+      setFrameIndex((currentFrame) =>
+        currentFrame === nextFrame ? currentFrame : nextFrame,
+      );
+
+      if (action.loop || nextFrame < action.frames - 1) {
+        animationFrameId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    animationFrameId = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [
+    action.directory,
+    action.fps,
+    action.frames,
+    action.loop,
+    shouldReduceMotion,
+  ]);
 
   return (
     <div
