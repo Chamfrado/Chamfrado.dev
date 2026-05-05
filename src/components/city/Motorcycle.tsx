@@ -41,6 +41,11 @@ const ACTIONS: Record<
 };
 
 type MotorcycleAction = (typeof ACTIONS)[MotorcyclePhase];
+const MOTORCYCLE_ASSET_VERSION = "clean-v3";
+
+function getFrameSource(action: MotorcycleAction, frameIndex: number) {
+  return `${action.directory}/${frameIndex}.png?v=${MOTORCYCLE_ASSET_VERSION}`;
+}
 
 type MotorcycleProps = {
   activeIndex: number;
@@ -58,6 +63,16 @@ function SpriteFrame({
 }) {
   const [frameIndex, setFrameIndex] = useState(0);
   const displayedFrame = shouldReduceMotion ? 0 : frameIndex;
+
+  useEffect(() => {
+    Object.values(ACTIONS).forEach((spriteAction) => {
+      Array.from({ length: spriteAction.frames }, (_, index) => {
+        const image = new Image();
+        image.src = getFrameSource(spriteAction, index);
+        return image;
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (shouldReduceMotion) return undefined;
@@ -78,7 +93,7 @@ function SpriteFrame({
       className="aspect-[280/200] w-full overflow-hidden brightness-[0.96] saturate-[1.04] drop-shadow-[0_0_18px_rgba(168,85,247,0.34)]"
     >
       <img
-        src={`${action.directory}/${displayedFrame}.png`}
+        src={getFrameSource(action, displayedFrame)}
         alt=""
         className="block h-full w-full select-none object-fill"
         draggable={false}
