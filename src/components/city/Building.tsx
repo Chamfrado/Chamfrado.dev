@@ -39,7 +39,7 @@ export default function Building({
         className={[
           "absolute bottom-1 h-4 w-[58%] rounded-full blur-xl transition duration-300 group-hover:w-[66%]",
           isActive
-            ? "animate-pulse bg-gradient-to-r from-fuchsia-500/40 via-cyan-300/35 to-fuchsia-500/40 group-hover:via-cyan-200/45"
+            ? "animate-pulse bg-linear-to-r from-fuchsia-500/40 via-cyan-300/35 to-fuchsia-500/40 group-hover:via-cyan-200/45"
             : "bg-fuchsia-500/10 group-hover:bg-fuchsia-400/18",
         ].join(" ")}
       />
@@ -86,7 +86,7 @@ export default function Building({
       <button
         type="button"
         onClick={onEnter}
-        className="absolute inset-0 z-30 cursor-pointer touch-manipulation rounded-[2rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+        className="absolute inset-0 z-30 cursor-pointer touch-manipulation rounded-4xl focus-visible:outline focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
         aria-label={`Enter ${section.title} district`}
       />
     </motion.div>

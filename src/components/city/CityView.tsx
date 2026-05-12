@@ -45,7 +45,7 @@ function Stars() {
       {dots.map((dot) => (
         <div
           key={dot.id}
-          className="absolute h-[2px] w-[2px] rounded-full bg-white"
+          className="absolute h-0.5 w-0.5 rounded-full bg-white"
           style={{ top: dot.top, left: dot.left, opacity: dot.opacity }}
         />
       ))}
@@ -55,7 +55,7 @@ function Stars() {
 
 function RoadLights() {
   return (
-    <div className="pointer-events-none absolute bottom-[calc(8.5vh+env(safe-area-inset-bottom))] left-0 right-0 z-[8] overflow-hidden opacity-80 md:bottom-[6.8vh]">
+    <div className="pointer-events-none absolute bottom-[calc(8.5vh+env(safe-area-inset-bottom))] left-0 right-0 z-8 overflow-hidden opacity-80 md:bottom-[6.8vh]">
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <motion.div
           key={index}
@@ -67,7 +67,7 @@ function RoadLights() {
             ease: "linear",
             delay: index * 0.28,
           }}
-          className="mb-2 h-[2px] w-24 bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent blur-[0.2px]"
+          className="mb-2 h-0.5-24 bg-linear-to-r from-transparent via-cyan-300/70 to-transparent blur-[0.2px]"
         />
       ))}
     </div>
@@ -89,9 +89,10 @@ function RepeatedSpriteLayer({
 }) {
   return (
     <motion.div
-      className={["pointer-events-none absolute bottom-0 left-0", className].join(
-        " ",
-      )}
+      className={[
+        "pointer-events-none absolute bottom-0 left-0",
+        className,
+      ].join(" ")}
       animate={{ x: -offset }}
       transition={CITY_ROW_TRANSITION}
       aria-hidden="true"
@@ -122,22 +123,22 @@ function SpriteBackdrop({
 }) {
   return (
     <>
-      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-[1] overflow-hidden md:bottom-[16vh]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-1 overflow-hidden md:bottom-[16vh]">
         <RepeatedSpriteLayer
           src="/assets/skyline/skyline.png"
           offset={skylineOffset}
           copies={3}
-          className="z-[1] h-[70vh] min-h-[390px]"
+          className="z-1 h-[70vh] min-h-97.5"
           imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-90 brightness-[0.86] saturate-[0.98]"
         />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[38vh] bg-[radial-gradient(ellipse_at_48%_55%,rgba(168,85,247,0.2),transparent_56%),radial-gradient(ellipse_at_68%_58%,rgba(34,211,238,0.1),transparent_50%),linear-gradient(to_bottom,transparent_0%,rgba(38,20,74,0.32)_34%,rgba(10,6,24,0.24)_78%,transparent_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-[38vh] bg-[radial-gradient(ellipse_at_48%_55%,rgba(168,85,247,0.2),transparent_56%),radial-gradient(ellipse_at_68%_58%,rgba(34,211,238,0.1),transparent_50%),linear-gradient(to_bottom,transparent_0%,rgba(38,20,74,0.32)_34%,rgba(10,6,24,0.24)_78%,transparent_100%)]" />
 
         <RepeatedSpriteLayer
           src="/assets/skyline/mid-buildings.png"
           offset={cityRowOffset}
           copies={5}
-          className="z-[3] h-[24vh] min-h-[150px]"
+          className="z-3-[24vh] min-h-37.5"
           imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-100 brightness-[0.95] saturate-[1.04]"
         />
       </div>
@@ -146,7 +147,7 @@ function SpriteBackdrop({
         src="/assets/road/road-base.png"
         offset={roadOffset}
         copies={4}
-        className="z-[3] h-[18vh] min-h-[118px] md:h-[16vh] md:min-h-[120px]"
+        className="z-3-[18vh] min-h-29.5 md:h-[16vh] md:min-h-30"
         imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-100 brightness-[0.9] saturate-[1.02]"
       />
     </>
@@ -156,10 +157,10 @@ function SpriteBackdrop({
 function SceneGrade() {
   return (
     <>
-      <div className="pointer-events-none absolute inset-0 z-[4] bg-[radial-gradient(circle_at_32%_24%,rgba(168,85,247,0.1),transparent_34%),radial-gradient(circle_at_72%_18%,rgba(34,211,238,0.08),transparent_32%),linear-gradient(to_bottom,rgba(4,2,9,0)_0%,rgba(4,2,9,0.04)_62%,rgba(3,1,7,0.24)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_center,transparent_58%,rgba(3,1,8,0.22)_86%,rgba(0,0,0,0.62)_100%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[52vh] z-[6] h-28 bg-gradient-to-b from-transparent via-[#2a1654]/16 to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[17.8vh] z-[7] h-px bg-gradient-to-r from-transparent via-fuchsia-300/22 to-transparent md:bottom-[15.8vh]" />
+      <div className="pointer-events-none absolute inset-0 z-4g-[radial-gradient(circle_at_32%_24%,rgba(168,85,247,0.1),transparent_34%),radial-gradient(circle_at_72%_18%,rgba(34,211,238,0.08),transparent_32%),linear-gradient(to_bottom,rgba(4,2,9,0)_0%,rgba(4,2,9,0.04)_62%,rgba(3,1,7,0.24)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 z-5 bg-[radial-gradient(ellipse_at_center,transparent_58%,rgba(3,1,8,0.22)_86%,rgba(0,0,0,0.62)_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-[52vh] z-6 h-28 bg-linear-to-b from-transparent via-[#2a1654]/16 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-[17.8vh] z-7 h-px bg-linear-to-r from-transparent via-fuchsia-300/22 to-transparent md:bottom-[15.8vh]" />
     </>
   );
 }
@@ -257,12 +258,7 @@ export default function CityView() {
         window.setTimeout(() => setMotorcyclePhase("idle"), 1740),
       ];
     },
-    [
-      activeIndex,
-      clearPhaseTimeouts,
-      motorcycleFacing,
-      shouldReduceMotion,
-    ],
+    [activeIndex, clearPhaseTimeouts, motorcycleFacing, shouldReduceMotion],
   );
 
   const goPrev = () => travelTo(activeIndex - 1);
@@ -288,7 +284,7 @@ export default function CityView() {
         />
         <SceneGrade />
 
-        <div className="pointer-events-none absolute left-0 right-0 top-0 z-[15] mx-auto max-w-7xl px-4 pt-4 md:px-8 md:pt-6">
+        <div className="pointer-events-none absolute left-0 right-0 top-0 z-15 mx-auto max-w-7xl px-4 pt-4 md:px-8 md:pt-6">
           <header>
             <p className="text-[10px] uppercase tracking-[0.45em] text-fuchsia-300/75">
               chamfrado.dev
@@ -296,15 +292,15 @@ export default function CityView() {
             <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
               Chamfrado.dev
             </h1>
-            <p className="mt-3 max-w-[22rem] text-sm leading-6 text-zinc-300 md:max-w-2xl md:text-base">
+            <p className="mt-3 max-w-88 text-sm leading-6 text-zinc-300 md:max-w-2xl md:text-base">
               A neon city portfolio for software development, interactive web
               work, and practical product experiments.
             </p>
           </header>
         </div>
 
-        <section className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-[9] overflow-hidden md:bottom-[16vh]">
-          <div className="pointer-events-auto absolute inset-x-0 bottom-0 h-[25vh] min-h-[165px] overflow-visible">
+        <section className="pointer-events-none absolute inset-x-0 top-0 bottom-[18vh] z-9 overflow-hidden md:bottom-[16vh]">
+          <div className="pointer-events-auto absolute inset-x-0 bottom-0 h-[25vh] min-h-41.25 overflow-visible">
             <div className="relative h-full overflow-visible">
               <motion.div
                 className="flex h-full items-end"

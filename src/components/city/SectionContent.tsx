@@ -5,8 +5,8 @@ import {
   ExternalLink,
   Globe,
   Mail,
-  MessageSquare,
   MessageCircle,
+  MessageSquare,
   Phone,
   Sparkles,
   UserRound,
@@ -64,7 +64,12 @@ const stackGroups = [
   },
   {
     title: "Product",
-    items: ["Company sites", "Desktop apps", "Portfolio systems", "Interactive UX"],
+    items: [
+      "Company sites",
+      "Desktop apps",
+      "Portfolio systems",
+      "Interactive UX",
+    ],
   },
 ];
 
@@ -87,7 +92,14 @@ const projects: ProjectItem[] = [
     status: "v1.0 released",
     description:
       "A company website and platform foundation built with a full-stack Java and React workflow.",
-    stack: ["Java", "React", "PostgreSQL", "Spring Boot", "Tailwind CSS", "Vite"],
+    stack: [
+      "Java",
+      "React",
+      "PostgreSQL",
+      "Spring Boot",
+      "Tailwind CSS",
+      "Vite",
+    ],
     links: [
       {
         label: "Live site",
@@ -129,7 +141,15 @@ const careerItems: CareerItem[] = [
       "Teach Programming Logic, Computational Thinking, Basic Computer Science, Java, Python, HTML/CSS, Databases, AI, and React.js.",
       "Prepare students to understand programming fundamentals through practical exercises and accessible technical explanations.",
     ],
-    skills: ["Teaching", "Java", "Python", "HTML/CSS", "Databases", "AI", "React.js"],
+    skills: [
+      "Teaching",
+      "Java",
+      "Python",
+      "HTML/CSS",
+      "Databases",
+      "AI",
+      "React.js",
+    ],
   },
   {
     title: "Educational Content Developer and Researcher",
@@ -142,7 +162,13 @@ const careerItems: CareerItem[] = [
       "Coached the programming team and prepared students for the Iron Cup competition.",
       "Collaborated with educators to design engaging and accessible learning materials.",
     ],
-    skills: ["Research", "Educational technology", "Robotics", "Artificial Intelligence", "Coaching"],
+    skills: [
+      "Research",
+      "Educational technology",
+      "Robotics",
+      "Artificial Intelligence",
+      "Coaching",
+    ],
   },
   {
     title: "Systems Development Analyst",
@@ -154,7 +180,13 @@ const careerItems: CareerItem[] = [
       "Built full-stack applications for different internal needs across the company.",
       "Delivered web applications and interface work with a practical focus on business workflows.",
     ],
-    skills: ["Full-stack development", "Web applications", "CSS", "Frontend", "Backend"],
+    skills: [
+      "Full-stack development",
+      "Web applications",
+      "CSS",
+      "Frontend",
+      "Backend",
+    ],
   },
 ];
 
@@ -208,7 +240,7 @@ function ActionLink({ href, children, external = true }: ActionLinkProps) {
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-cyan-300"
     >
       {children}
       {external ? (
@@ -259,7 +291,7 @@ function ProjectCard({
             href={link.href}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+            className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus-visible:outline focus-visible:outline-cyan-300"
           >
             {link.label}
             <ExternalLink className="h-3.5 w-3.5" />
@@ -353,9 +385,7 @@ export default function SectionContent({ section }: { section: SectionItem }) {
             <ActionLink href={contactLinks.email} external={false}>
               Start a project
             </ActionLink>
-            <ActionLink href={contactLinks.github}>
-              View code
-            </ActionLink>
+            <ActionLink href={contactLinks.github}>View code</ActionLink>
           </div>
         </div>
       );
@@ -397,21 +427,36 @@ export default function SectionContent({ section }: { section: SectionItem }) {
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
                 Strongest skills
               </p>
-              <TagList items={["React", "Java", "Teaching", "Full-stack systems"]} />
+              <TagList
+                items={["React", "Java", "Teaching", "Full-stack systems"]}
+              />
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
                 Work I want
               </p>
-              <TagList items={["Freelance sites", "Internal tools", "Product prototypes", "Startups"]} />
+              <TagList
+                items={[
+                  "Freelance sites",
+                  "Internal tools",
+                  "Product prototypes",
+                  "Startups",
+                ]}
+              />
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
                 Languages
               </p>
-              <TagList items={["Portuguese - Native", "English - Advanced", "International work"]} />
+              <TagList
+                items={[
+                  "Portuguese - Native",
+                  "English - Advanced",
+                  "International work",
+                ]}
+              />
             </div>
           </div>
 
@@ -429,9 +474,7 @@ export default function SectionContent({ section }: { section: SectionItem }) {
             <ActionLink href={contactLinks.email} external={false}>
               Work with me
             </ActionLink>
-            <ActionLink href={contactLinks.linkedin}>
-              LinkedIn
-            </ActionLink>
+            <ActionLink href={contactLinks.linkedin}>LinkedIn</ActionLink>
           </div>
         </div>
       );
@@ -466,7 +509,7 @@ export default function SectionContent({ section }: { section: SectionItem }) {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/25 p-4 transition hover:border-fuchsia-300/35 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+                className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/25 p-4 transition hover:border-fuchsia-300/35 hover:bg-fuchsia-500/10 focus-visible:outline focus-visible:outline-cyan-300"
               >
                 <link.icon className="h-5 w-5 shrink-0 text-fuchsia-200" />
                 <span>
@@ -532,15 +575,11 @@ export default function SectionContent({ section }: { section: SectionItem }) {
             <ActionLink href={contactLinks.email} external={false}>
               Email
             </ActionLink>
-            <ActionLink href={contactLinks.whatsapp}>
-              WhatsApp
-            </ActionLink>
+            <ActionLink href={contactLinks.whatsapp}>WhatsApp</ActionLink>
             <ActionLink href={contactLinks.phone} external={false}>
               Call
             </ActionLink>
-            <ActionLink href={contactLinks.linkedin}>
-              LinkedIn
-            </ActionLink>
+            <ActionLink href={contactLinks.linkedin}>LinkedIn</ActionLink>
           </div>
         </div>
       );

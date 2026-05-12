@@ -194,14 +194,14 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
             animate="visible"
             exit="closed"
             style={{ transformOrigin: "50% 50%" }}
-            className="relative flex h-full w-full max-w-5xl flex-col overflow-hidden border border-fuchsia-400/30 bg-zinc-950 shadow-[0_0_40px_rgba(168,85,247,0.35)] md:h-auto md:max-h-[90vh] md:rounded-[2rem]"
+            className="relative flex h-full w-full max-w-5xl flex-col overflow-hidden border border-fuchsia-400/30 bg-zinc-950 shadow-[0_0_40px_rgba(168,85,247,0.35)] md:h-auto md:max-h-[90vh] md:rounded-4xl"
           >
             <motion.div
               variants={beamVariants}
               initial="hidden"
               animate="visible"
               exit="closed"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-[3px] w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-100 shadow-[0_0_10px_rgba(255,255,255,0.95),0_0_28px_rgba(34,211,238,0.85),0_0_64px_rgba(217,70,239,0.55)]"
+              className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-0.75 w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-100 shadow-[0_0_10px_rgba(255,255,255,0.95),0_0_28px_rgba(34,211,238,0.85),0_0_64px_rgba(217,70,239,0.55)]"
             />
             {!shouldReduceMotion ? (
               <motion.div
@@ -219,7 +219,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
               animate={{ opacity: shouldReduceMotion ? 0.14 : 0.2 }}
               exit={{ opacity: shouldReduceMotion ? 0.14 : 0.5 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.32 }}
-              className="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_2px)] bg-[length:100%_4px]"
+              className="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_2px)] bg-size-[100%_4px]"
             />
             <div className="pointer-events-none absolute inset-0 z-20 bg-fuchsia-500/5 mix-blend-overlay" />
             <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.32)_100%)]" />
@@ -252,7 +252,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
               </div>
 
               <div className="relative grid min-h-0 flex-1 gap-6 overflow-y-auto px-4 py-5 md:grid-cols-[1.15fr_0.85fr] md:px-6 md:py-6">
-                <div className="rounded-[1.5rem] border border-fuchsia-400/20 bg-black/40 p-4 shadow-inner shadow-fuchsia-500/10 md:p-6">
+                <div className="rounded-3xl border border-fuchsia-400/20 bg-black/40 p-4 shadow-inner shadow-fuchsia-500/10 md:p-6">
                   <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">
                     Broadcast
                   </p>
@@ -270,7 +270,7 @@ export default function CRTPanel({ open, section, onClose }: CRTPanelProps) {
                   </div>
                 </div>
 
-                <div className="rounded-[1.5rem] border border-cyan-400/20 bg-gradient-to-b from-fuchsia-500/10 to-cyan-400/5 p-4 md:p-5">
+                <div className="rounded-3xl border border-cyan-400/20 bg-linear-to-b from-fuchsia-500/10 to-cyan-400/5 p-4 md:p-5">
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/25 p-4 text-zinc-200">
                     <section.icon className="h-5 w-5 text-fuchsia-300" />
                     <div>

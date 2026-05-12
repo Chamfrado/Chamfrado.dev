@@ -119,7 +119,7 @@ function SpriteFrame({
   return (
     <div
       aria-hidden="true"
-      className="aspect-[280/200] w-full overflow-hidden brightness-[0.96] saturate-[1.04] drop-shadow-[0_0_18px_rgba(168,85,247,0.34)]"
+      className="aspect-280/200 w-full overflow-hidden brightness-[0.96] saturate-[1.04] drop-shadow-[0_0_18px_rgba(168,85,247,0.34)]"
     >
       <img
         src={getFrameSource(action, displayedFrame)}
@@ -144,19 +144,19 @@ export default function Motorcycle({
     <motion.div
       animate={{ rotate: activeIndex % 2 === 0 ? -2 : 2 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className="pointer-events-none absolute bottom-[calc(14vh+env(safe-area-inset-bottom))] left-1/2 z-[12] -translate-x-1/2 md:bottom-[5.4vh]"
+      className="pointer-events-none absolute bottom-[calc(14vh+env(safe-area-inset-bottom))] left-1/2 z-12 -translate-x-1/2 md:bottom-[5.4vh]"
     >
       <div className="relative">
         <motion.div
           animate={{ opacity: [0.38, 0.58, 0.38] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute left-1/2 top-[78%] h-5 w-36 -translate-x-1/2 rounded-full bg-gradient-to-r from-fuchsia-500/30 via-cyan-300/22 to-fuchsia-500/30 blur-xl md:w-44"
+          className="absolute left-1/2 top-[78%] h-5 w-36 -translate-x-1/2 rounded-full bg-linear-to-r from-fuchsia-500/30 via-cyan-300/22 to-fuchsia-500/30 blur-xl md:w-44"
         />
 
         <motion.div
           animate={shouldReduceMotion ? { y: 0 } : { y: [0, -1.25, 0] }}
           transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-          className="relative h-auto w-[154px] max-w-none min-[390px]:w-[168px] md:w-[188px]"
+          className="relative h-auto w-38.5 max-w-none min-[390px]:w-42 md:w-47"
         >
           <div
             key={`${phase}-${facing}-${sequenceId}`}

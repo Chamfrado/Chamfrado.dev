@@ -27,13 +27,13 @@ export default function BuildingCard({
     >
       <div
         className={[
-          "relative overflow-hidden rounded-[2rem] border p-5 backdrop-blur-xl transition duration-300 md:p-6",
+          "relative overflow-hidden rounded-4xl border p-5 backdrop-blur-xl transition duration-300 md:p-6",
           isActive
             ? "border-fuchsia-300/40 bg-black/40 shadow-[0_0_40px_rgba(168,85,247,0.25)]"
             : "border-fuchsia-400/10 bg-black/10",
         ].join(" ")}
       >
-        <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-fuchsia-300/70 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-transparent via-fuchsia-300/70 to-transparent" />
         <div
           className={[
             "absolute -right-10 -top-10 h-28 w-28 rounded-full blur-3xl transition duration-300",
@@ -64,7 +64,7 @@ export default function BuildingCard({
             </div>
           </div>
 
-          <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-black/30 p-4">
+          <div className="mt-6 rounded-3xl border border-white/10 bg-black/30 p-4">
             <p className="text-sm text-fuchsia-200/90">{section.subtitle}</p>
 
             <p className="mt-3 text-sm leading-6 text-zinc-300">
