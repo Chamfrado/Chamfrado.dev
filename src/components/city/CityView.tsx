@@ -127,7 +127,7 @@ function SpriteBackdrop({
           src="/assets/skyline/skyline.png"
           offset={skylineOffset}
           copies={3}
-          className="z-[1] h-[70vh] min-h-[390px]"
+          className="z-[1] h-full min-h-[390px]"
           imageClassName="h-full w-auto max-w-none shrink-0 object-contain object-bottom opacity-90 brightness-[0.86] saturate-[0.98]"
         />
 
