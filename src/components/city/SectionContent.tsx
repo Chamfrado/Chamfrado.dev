@@ -112,6 +112,30 @@ const projects: ProjectItem[] = [
     ],
   },
   {
+    title: "StudyForge",
+    status: "Full-stack AI workspace",
+    description:
+      "An AI study platform that turns uploaded materials into summaries, flashcards, quizzes, quiz attempts, and analytics.",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "JWT",
+      "Docker",
+      "OpenAI-compatible AI",
+    ],
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/Chamfrado/StudyForge-API",
+      },
+    ],
+  },
+  {
     title: "Shelfy",
     status: "v1.0 released",
     description:
